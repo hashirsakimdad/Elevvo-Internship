@@ -1,0 +1,216 @@
+filename,width,height,rgb,class_id,class_name
+00000_00000_00000.png,32,32,3,0,Speed limit 20
+00000_00000_00001.png,32,32,3,0,Speed limit 20
+00000_00000_00002.png,32,32,3,0,Speed limit 20
+00000_00000_00003.png,32,32,3,0,Speed limit 20
+00000_00000_00004.png,32,32,3,0,Speed limit 20
+00000_00001_00000.png,32,32,3,1,Speed limit 30
+00000_00001_00001.png,32,32,3,1,Speed limit 30
+00000_00001_00002.png,32,32,3,1,Speed limit 30
+00000_00001_00003.png,32,32,3,1,Speed limit 30
+00000_00001_00004.png,32,32,3,1,Speed limit 30
+00000_00002_00000.png,32,32,3,2,Speed limit 50
+00000_00002_00001.png,32,32,3,2,Speed limit 50
+00000_00002_00002.png,32,32,3,2,Speed limit 50
+00000_00002_00003.png,32,32,3,2,Speed limit 50
+00000_00002_00004.png,32,32,3,2,Speed limit 50
+00000_00003_00000.png,32,32,3,3,Speed limit 60
+00000_00003_00001.png,32,32,3,3,Speed limit 60
+00000_00003_00002.png,32,32,3,3,Speed limit 60
+00000_00003_00003.png,32,32,3,3,Speed limit 60
+00000_00003_00004.png,32,32,3,3,Speed limit 60
+00000_00004_00000.png,32,32,3,4,Speed limit 70
+00000_00004_00001.png,32,32,3,4,Speed limit 70
+00000_00004_00002.png,32,32,3,4,Speed limit 70
+00000_00004_00003.png,32,32,3,4,Speed limit 70
+00000_00004_00004.png,32,32,3,4,Speed limit 70
+00000_00005_00000.png,32,32,3,5,Speed limit 80
+00000_00005_00001.png,32,32,3,5,Speed limit 80
+00000_00005_00002.png,32,32,3,5,Speed limit 80
+00000_00005_00003.png,32,32,3,5,Speed limit 80
+00000_00005_00004.png,32,32,3,5,Speed limit 80
+00000_00006_00000.png,32,32,3,6,End of speed limit 80
+00000_00006_00001.png,32,32,3,6,End of speed limit 80
+00000_00006_00002.png,32,32,3,6,End of speed limit 80
+00000_00006_00003.png,32,32,3,6,End of speed limit 80
+00000_00006_00004.png,32,32,3,6,End of speed limit 80
+00000_00007_00000.png,32,32,3,7,Speed limit 100
+00000_00007_00001.png,32,32,3,7,Speed limit 100
+00000_00007_00002.png,32,32,3,7,Speed limit 100
+00000_00007_00003.png,32,32,3,7,Speed limit 100
+00000_00007_00004.png,32,32,3,7,Speed limit 100
+00000_00008_00000.png,32,32,3,8,Speed limit 120
+00000_00008_00001.png,32,32,3,8,Speed limit 120
+00000_00008_00002.png,32,32,3,8,Speed limit 120
+00000_00008_00003.png,32,32,3,8,Speed limit 120
+00000_00008_00004.png,32,32,3,8,Speed limit 120
+00000_00009_00000.png,32,32,3,9,No passing
+00000_00009_00001.png,32,32,3,9,No passing
+00000_00009_00002.png,32,32,3,9,No passing
+00000_00009_00003.png,32,32,3,9,No passing
+00000_00009_00004.png,32,32,3,9,No passing
+00000_00010_00000.png,32,32,3,10,No passing for vehicles over 3.5 tons
+00000_00010_00001.png,32,32,3,10,No passing for vehicles over 3.5 tons
+00000_00010_00002.png,32,32,3,10,No passing for vehicles over 3.5 tons
+00000_00010_00003.png,32,32,3,10,No passing for vehicles over 3.5 tons
+00000_00010_00004.png,32,32,3,10,No passing for vehicles over 3.5 tons
+00000_00011_00000.png,32,32,3,11,Right-of-way at next intersection
+00000_00011_00001.png,32,32,3,11,Right-of-way at next intersection
+00000_00011_00002.png,32,32,3,11,Right-of-way at next intersection
+00000_00011_00003.png,32,32,3,11,Right-of-way at next intersection
+00000_00011_00004.png,32,32,3,11,Right-of-way at next intersection
+00000_00012_00000.png,32,32,3,12,Priority road
+00000_00012_00001.png,32,32,3,12,Priority road
+00000_00012_00002.png,32,32,3,12,Priority road
+00000_00012_00003.png,32,32,3,12,Priority road
+00000_00012_00004.png,32,32,3,12,Priority road
+00000_00013_00000.png,32,32,3,13,Yield
+00000_00013_00001.png,32,32,3,13,Yield
+00000_00013_00002.png,32,32,3,13,Yield
+00000_00013_00003.png,32,32,3,13,Yield
+00000_00013_00004.png,32,32,3,13,Yield
+00000_00014_00000.png,32,32,3,14,Stop
+00000_00014_00001.png,32,32,3,14,Stop
+00000_00014_00002.png,32,32,3,14,Stop
+00000_00014_00003.png,32,32,3,14,Stop
+00000_00014_00004.png,32,32,3,14,Stop
+00000_00015_00000.png,32,32,3,15,No vehicles
+00000_00015_00001.png,32,32,3,15,No vehicles
+00000_00015_00002.png,32,32,3,15,No vehicles
+00000_00015_00003.png,32,32,3,15,No vehicles
+00000_00015_00004.png,32,32,3,15,No vehicles
+00000_00016_00000.png,32,32,3,16,Vehicles over 3.5 tons prohibited
+00000_00016_00001.png,32,32,3,16,Vehicles over 3.5 tons prohibited
+00000_00016_00002.png,32,32,3,16,Vehicles over 3.5 tons prohibited
+00000_00016_00003.png,32,32,3,16,Vehicles over 3.5 tons prohibited
+00000_00016_00004.png,32,32,3,16,Vehicles over 3.5 tons prohibited
+00000_00017_00000.png,32,32,3,17,No entry
+00000_00017_00001.png,32,32,3,17,No entry
+00000_00017_00002.png,32,32,3,17,No entry
+00000_00017_00003.png,32,32,3,17,No entry
+00000_00017_00004.png,32,32,3,17,No entry
+00000_00018_00000.png,32,32,3,18,General caution
+00000_00018_00001.png,32,32,3,18,General caution
+00000_00018_00002.png,32,32,3,18,General caution
+00000_00018_00003.png,32,32,3,18,General caution
+00000_00018_00004.png,32,32,3,18,General caution
+00000_00019_00000.png,32,32,3,19,Dangerous curve left
+00000_00019_00001.png,32,32,3,19,Dangerous curve left
+00000_00019_00002.png,32,32,3,19,Dangerous curve left
+00000_00019_00003.png,32,32,3,19,Dangerous curve left
+00000_00019_00004.png,32,32,3,19,Dangerous curve left
+00000_00020_00000.png,32,32,3,20,Dangerous curve right
+00000_00020_00001.png,32,32,3,20,Dangerous curve right
+00000_00020_00002.png,32,32,3,20,Dangerous curve right
+00000_00020_00003.png,32,32,3,20,Dangerous curve right
+00000_00020_00004.png,32,32,3,20,Dangerous curve right
+00000_00021_00000.png,32,32,3,21,Double curve
+00000_00021_00001.png,32,32,3,21,Double curve
+00000_00021_00002.png,32,32,3,21,Double curve
+00000_00021_00003.png,32,32,3,21,Double curve
+00000_00021_00004.png,32,32,3,21,Double curve
+00000_00022_00000.png,32,32,3,22,Bumpy road
+00000_00022_00001.png,32,32,3,22,Bumpy road
+00000_00022_00002.png,32,32,3,22,Bumpy road
+00000_00022_00003.png,32,32,3,22,Bumpy road
+00000_00022_00004.png,32,32,3,22,Bumpy road
+00000_00023_00000.png,32,32,3,23,Slippery road
+00000_00023_00001.png,32,32,3,23,Slippery road
+00000_00023_00002.png,32,32,3,23,Slippery road
+00000_00023_00003.png,32,32,3,23,Slippery road
+00000_00023_00004.png,32,32,3,23,Slippery road
+00000_00024_00000.png,32,32,3,24,Road narrows on the right
+00000_00024_00001.png,32,32,3,24,Road narrows on the right
+00000_00024_00002.png,32,32,3,24,Road narrows on the right
+00000_00024_00003.png,32,32,3,24,Road narrows on the right
+00000_00024_00004.png,32,32,3,24,Road narrows on the right
+00000_00025_00000.png,32,32,3,25,Road work
+00000_00025_00001.png,32,32,3,25,Road work
+00000_00025_00002.png,32,32,3,25,Road work
+00000_00025_00003.png,32,32,3,25,Road work
+00000_00025_00004.png,32,32,3,25,Road work
+00000_00026_00000.png,32,32,3,26,Traffic signals
+00000_00026_00001.png,32,32,3,26,Traffic signals
+00000_00026_00002.png,32,32,3,26,Traffic signals
+00000_00026_00003.png,32,32,3,26,Traffic signals
+00000_00026_00004.png,32,32,3,26,Traffic signals
+00000_00027_00000.png,32,32,3,27,Pedestrians
+00000_00027_00001.png,32,32,3,27,Pedestrians
+00000_00027_00002.png,32,32,3,27,Pedestrians
+00000_00027_00003.png,32,32,3,27,Pedestrians
+00000_00027_00004.png,32,32,3,27,Pedestrians
+00000_00028_00000.png,32,32,3,28,Children crossing
+00000_00028_00001.png,32,32,3,28,Children crossing
+00000_00028_00002.png,32,32,3,28,Children crossing
+00000_00028_00003.png,32,32,3,28,Children crossing
+00000_00028_00004.png,32,32,3,28,Children crossing
+00000_00029_00000.png,32,32,3,29,Bicycles crossing
+00000_00029_00001.png,32,32,3,29,Bicycles crossing
+00000_00029_00002.png,32,32,3,29,Bicycles crossing
+00000_00029_00003.png,32,32,3,29,Bicycles crossing
+00000_00029_00004.png,32,32,3,29,Bicycles crossing
+00000_00030_00000.png,32,32,3,30,Beware of ice/snow
+00000_00030_00001.png,32,32,3,30,Beware of ice/snow
+00000_00030_00002.png,32,32,3,30,Beware of ice/snow
+00000_00030_00003.png,32,32,3,30,Beware of ice/snow
+00000_00030_00004.png,32,32,3,30,Beware of ice/snow
+00000_00031_00000.png,32,32,3,31,Wild animals crossing
+00000_00031_00001.png,32,32,3,31,Wild animals crossing
+00000_00031_00002.png,32,32,3,31,Wild animals crossing
+00000_00031_00003.png,32,32,3,31,Wild animals crossing
+00000_00031_00004.png,32,32,3,31,Wild animals crossing
+00000_00032_00000.png,32,32,3,32,End of all speed and passing limits
+00000_00032_00001.png,32,32,3,32,End of all speed and passing limits
+00000_00032_00002.png,32,32,3,32,End of all speed and passing limits
+00000_00032_00003.png,32,32,3,32,End of all speed and passing limits
+00000_00032_00004.png,32,32,3,32,End of all speed and passing limits
+00000_00033_00000.png,32,32,3,33,Turn right ahead
+00000_00033_00001.png,32,32,3,33,Turn right ahead
+00000_00033_00002.png,32,32,3,33,Turn right ahead
+00000_00033_00003.png,32,32,3,33,Turn right ahead
+00000_00033_00004.png,32,32,3,33,Turn right ahead
+00000_00034_00000.png,32,32,3,34,Turn left ahead
+00000_00034_00001.png,32,32,3,34,Turn left ahead
+00000_00034_00002.png,32,32,3,34,Turn left ahead
+00000_00034_00003.png,32,32,3,34,Turn left ahead
+00000_00034_00004.png,32,32,3,34,Turn left ahead
+00000_00035_00000.png,32,32,3,35,Ahead only
+00000_00035_00001.png,32,32,3,35,Ahead only
+00000_00035_00002.png,32,32,3,35,Ahead only
+00000_00035_00003.png,32,32,3,35,Ahead only
+00000_00035_00004.png,32,32,3,35,Ahead only
+00000_00036_00000.png,32,32,3,36,Go straight or right
+00000_00036_00001.png,32,32,3,36,Go straight or right
+00000_00036_00002.png,32,32,3,36,Go straight or right
+00000_00036_00003.png,32,32,3,36,Go straight or right
+00000_00036_00004.png,32,32,3,36,Go straight or right
+00000_00037_00000.png,32,32,3,37,Go straight or left
+00000_00037_00001.png,32,32,3,37,Go straight or left
+00000_00037_00002.png,32,32,3,37,Go straight or left
+00000_00037_00003.png,32,32,3,37,Go straight or left
+00000_00037_00004.png,32,32,3,37,Go straight or left
+00000_00038_00000.png,32,32,3,38,Keep right
+00000_00038_00001.png,32,32,3,38,Keep right
+00000_00038_00002.png,32,32,3,38,Keep right
+00000_00038_00003.png,32,32,3,38,Keep right
+00000_00038_00004.png,32,32,3,38,Keep right
+00000_00039_00000.png,32,32,3,39,Keep left
+00000_00039_00001.png,32,32,3,39,Keep left
+00000_00039_00002.png,32,32,3,39,Keep left
+00000_00039_00003.png,32,32,3,39,Keep left
+00000_00039_00004.png,32,32,3,39,Keep left
+00000_00040_00000.png,32,32,3,40,Roundabout mandatory
+00000_00040_00001.png,32,32,3,40,Roundabout mandatory
+00000_00040_00002.png,32,32,3,40,Roundabout mandatory
+00000_00040_00003.png,32,32,3,40,Roundabout mandatory
+00000_00040_00004.png,32,32,3,40,Roundabout mandatory
+00000_00041_00000.png,32,32,3,41,End of no passing
+00000_00041_00001.png,32,32,3,41,End of no passing
+00000_00041_00002.png,32,32,3,41,End of no passing
+00000_00041_00003.png,32,32,3,41,End of no passing
+00000_00041_00004.png,32,32,3,41,End of no passing
+00000_00042_00000.png,32,32,3,42,End of no passing by vehicles over 3.5 tons
+00000_00042_00001.png,32,32,3,42,End of no passing by vehicles over 3.5 tons
+00000_00042_00002.png,32,32,3,42,End of no passing by vehicles over 3.5 tons
+00000_00042_00003.png,32,32,3,42,End of no passing by vehicles over 3.5 tons
+00000_00042_00004.png,32,32,3,42,End of no passing by vehicles over 3.5 tons
