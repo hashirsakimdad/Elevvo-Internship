@@ -13,7 +13,7 @@ Bonus:
 - Implement item-based collaborative filtering
 - Try matrix factorization (SVD)
 
-Author: AI Assistant
+Author: Muhammad Hashir Sakim dad
 Date: 2025
 """
 
