@@ -14,7 +14,7 @@ Bonus:
 - Compare different models (e.g., Random Forest vs. XGBoost)
 - Perform hyperparameter tuning
 
-Author: AI Assistant
+Author: Muhammad Hashir Sakim Dad
 Date: 2025
 """
 
