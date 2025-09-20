@@ -14,7 +14,7 @@ Bonus:
 - Try both tabular and image-based approaches and compare results
 - Use transfer learning on spectrograms
 
-Author: AI Assistant
+Author: Muhammad Hashir Sakim dad
 Date: 2025
 """
 
