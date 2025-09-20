@@ -15,7 +15,7 @@ Bonus:
 - Apply data augmentation techniques
 - Implement ensemble methods
 
-Author: AI Assistant
+Author: Muhammad Hashir Sakim dad
 Date: 2025
 """
 
