@@ -15,7 +15,7 @@ Bonus:
 - Try polynomial regression and compare performance
 - Try experimenting with different feature combinations
 
-Author: AI Assistant
+Author: MUHAMMAD HASHIR SAKIM DAD
 Date: 2025
 """
 
