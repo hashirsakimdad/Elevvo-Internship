@@ -14,7 +14,8 @@ Bonus:
 - Use rolling averages and seasonal decomposition
 - Apply XGBoost or LightGBM with time-aware validation
 
-Author: AI Assistant
+Author: Muhammad Hashir Sakim dad
+
 Date: 2025
 """
 
