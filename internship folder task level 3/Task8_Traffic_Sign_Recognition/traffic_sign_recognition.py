@@ -188,8 +188,9 @@ class TrafficSignRecognizer:
         """
         Create comprehensive exploratory visualizations
         """
-        fig, axes = plt.subplots(2, 3, figsize=(18, 12))
-        fig.suptitle('Traffic Sign Dataset Exploration', fontsize=16, fontweight='bold')
+        fig, axes = plt.subplots(2, 3, figsize=(20, 14))
+        fig.suptitle('Traffic Sign Dataset Exploration', fontsize=18, fontweight='bold', y=0.98)
+        fig.subplots_adjust(top=0.93, bottom=0.08, left=0.08, right=0.95, hspace=0.35, wspace=0.3)
         
         # Sample images
         sample_indices = np.random.choice(len(images), 6, replace=False)  # Changed from 9 to 6
@@ -199,13 +200,13 @@ class TrafficSignRecognizer:
             axes[row, col].set_title(f'{class_names[labels[idx]]}')
             axes[row, col].axis('off')
         
-        plt.tight_layout()
-        plt.savefig('internship folder task level 3/Task8_Traffic_Sign_Recognition/sample_images.png', 
-                   dpi=300, bbox_inches='tight')
+        plt.savefig('sample_images.png', 
+                   dpi=300, bbox_inches='tight', facecolor='white')
         plt.show()
         
         # Class distribution
-        plt.figure(figsize=(15, 8))
+        plt.figure(figsize=(16, 10))
+        plt.subplots_adjust(left=0.08, right=0.95, top=0.85, bottom=0.15)
         unique_classes, counts = np.unique(labels, return_counts=True)
         class_labels = [class_names[i] for i in unique_classes]
         
@@ -216,13 +217,13 @@ class TrafficSignRecognizer:
         plt.xticks(range(len(class_labels)), class_labels, rotation=45, ha='right')
         plt.grid(True, alpha=0.3)
         
-        plt.tight_layout()
-        plt.savefig('internship folder task level 3/Task8_Traffic_Sign_Recognition/class_distribution.png', 
-                   dpi=300, bbox_inches='tight')
+        plt.savefig('class_distribution.png', 
+                   dpi=300, bbox_inches='tight', facecolor='white')
         plt.show()
         
         # Pixel value distribution
-        plt.figure(figsize=(12, 6))
+        plt.figure(figsize=(14, 8))
+        plt.subplots_adjust(left=0.08, right=0.95, top=0.85, bottom=0.15, wspace=0.3)
         
         plt.subplot(1, 2, 1)
         plt.hist(images.flatten(), bins=50, alpha=0.7, color='green', edgecolor='black')
@@ -238,9 +239,8 @@ class TrafficSignRecognizer:
         plt.ylabel('Pixel Value')
         plt.grid(True, alpha=0.3)
         
-        plt.tight_layout()
-        plt.savefig('internship folder task level 3/Task8_Traffic_Sign_Recognition/pixel_analysis.png', 
-                   dpi=300, bbox_inches='tight')
+        plt.savefig('pixel_analysis.png', 
+                   dpi=300, bbox_inches='tight', facecolor='white')
         plt.show()
     
     def preprocess_data(self, images, labels):
@@ -483,8 +483,9 @@ class TrafficSignRecognizer:
         all_results = {**tabular_results, **dl_results}
         
         # Model comparison
-        fig, axes = plt.subplots(1, 2, figsize=(15, 6))
-        fig.suptitle('Model Performance Comparison', fontsize=16, fontweight='bold')
+        fig, axes = plt.subplots(1, 2, figsize=(16, 8))
+        fig.suptitle('Model Performance Comparison', fontsize=18, fontweight='bold', y=0.98)
+        fig.subplots_adjust(top=0.85, bottom=0.15, left=0.08, right=0.95, wspace=0.3)
         
         # Accuracy comparison
         model_names = list(all_results.keys())
@@ -515,9 +516,8 @@ class TrafficSignRecognizer:
             axes[1].legend()
             axes[1].grid(True, alpha=0.3)
         
-        plt.tight_layout()
-        plt.savefig('internship folder task level 3/Task8_Traffic_Sign_Recognition/model_comparison.png', 
-                   dpi=300, bbox_inches='tight')
+        plt.savefig('model_comparison.png', 
+                   dpi=300, bbox_inches='tight', facecolor='white')
         plt.show()
         
         # Confusion matrix for best model
@@ -530,7 +530,8 @@ class TrafficSignRecognizer:
         # Create confusion matrix
         cm = confusion_matrix(y_test_classes, best_predictions)
         
-        plt.figure(figsize=(12, 10))
+        plt.figure(figsize=(14, 12))
+        plt.subplots_adjust(left=0.08, right=0.95, top=0.85, bottom=0.15)
         sns.heatmap(cm, annot=True, fmt='d', cmap='Blues', 
                    xticklabels=class_names, yticklabels=class_names)
         plt.title(f'Confusion Matrix - {best_model_name}\nAccuracy: {all_results[best_model_name]["accuracy"]:.3f}')
@@ -539,9 +540,8 @@ class TrafficSignRecognizer:
         plt.tick_params(axis='x', rotation=45)
         plt.tick_params(axis='y', rotation=0)
         
-        plt.tight_layout()
-        plt.savefig('internship folder task level 3/Task8_Traffic_Sign_Recognition/confusion_matrix.png', 
-                   dpi=300, bbox_inches='tight')
+        plt.savefig('confusion_matrix.png', 
+                   dpi=300, bbox_inches='tight', facecolor='white')
         plt.show()
         
         # Classification report

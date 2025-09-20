@@ -174,8 +174,9 @@ class MovieRecommendationSystem:
         """
         Create comprehensive exploratory visualizations
         """
-        fig, axes = plt.subplots(2, 3, figsize=(18, 12))
-        fig.suptitle('Movie Rating Data Exploration', fontsize=16, fontweight='bold')
+        fig, axes = plt.subplots(2, 3, figsize=(20, 14))
+        fig.suptitle('Movie Rating Data Exploration', fontsize=18, fontweight='bold', y=0.98)
+        fig.subplots_adjust(top=0.93, bottom=0.08, left=0.08, right=0.95, hspace=0.35, wspace=0.3)
         
         # Rating distribution
         rating_counts = rating_data['rating'].value_counts().sort_index()
@@ -243,9 +244,8 @@ class MovieRecommendationSystem:
         axes[1, 2].set_ylabel('Average Rating')
         axes[1, 2].grid(True, alpha=0.3)
         
-        plt.tight_layout()
-        plt.savefig('internship folder task level 2/Task5_Movie_Recommendation_System/data_exploration.png', 
-                   dpi=300, bbox_inches='tight')
+        plt.savefig('data_exploration.png', 
+                   dpi=300, bbox_inches='tight', facecolor='white')
         plt.show()
     
     def create_user_item_matrix(self, rating_data):
@@ -510,8 +510,9 @@ class MovieRecommendationSystem:
         svd_recs = self.matrix_factorization_svd(user_id, n_recommendations)
         
         # Create comparison plot
-        fig, axes = plt.subplots(1, 3, figsize=(18, 6))
-        fig.suptitle(f'Recommendation Comparison for User {user_id}', fontsize=16, fontweight='bold')
+        fig, axes = plt.subplots(1, 3, figsize=(20, 8))
+        fig.suptitle(f'Recommendation Comparison for User {user_id}', fontsize=18, fontweight='bold', y=0.98)
+        fig.subplots_adjust(top=0.85, bottom=0.15, left=0.08, right=0.95, wspace=0.3)
         
         methods = [
             ('User-Based CF', user_based_recs),
@@ -536,9 +537,8 @@ class MovieRecommendationSystem:
                 axes[i].set_xticks(range(len(movie_ids)))
                 axes[i].set_xticklabels([f"Movie {mid}" for mid in movie_ids], rotation=45)
         
-        plt.tight_layout()
-        plt.savefig('internship folder task level 2/Task5_Movie_Recommendation_System/recommendation_comparison.png', 
-                   dpi=300, bbox_inches='tight')
+        plt.savefig('recommendation_comparison.png', 
+                   dpi=300, bbox_inches='tight', facecolor='white')
         plt.show()
         
         # Print comparison summary

@@ -246,8 +246,9 @@ class MusicGenreClassifier:
         """
         Create comprehensive exploratory visualizations
         """
-        fig, axes = plt.subplots(2, 3, figsize=(18, 12))
-        fig.suptitle('Music Genre Data Exploration', fontsize=16, fontweight='bold')
+        fig, axes = plt.subplots(2, 3, figsize=(20, 14))
+        fig.suptitle('Music Genre Data Exploration', fontsize=18, fontweight='bold', y=0.98)
+        fig.subplots_adjust(top=0.93, bottom=0.08, left=0.08, right=0.95, hspace=0.35, wspace=0.3)
         
         # Genre distribution
         genre_counts = data['genre'].value_counts()
@@ -303,9 +304,8 @@ class MusicGenreClassifier:
                 text = axes[1, 2].text(j, i, f'{correlation_matrix.iloc[i, j]:.2f}',
                                      ha="center", va="center", color="black", fontweight='bold')
         
-        plt.tight_layout()
-        plt.savefig('internship folder task level 3/Task6_Music_Genre_Classification/data_exploration.png', 
-                   dpi=300, bbox_inches='tight')
+        plt.savefig('data_exploration.png', 
+                   dpi=300, bbox_inches='tight', facecolor='white')
         plt.show()
     
     def preprocess_tabular_data(self, data):
@@ -579,8 +579,9 @@ class MusicGenreClassifier:
         print("=" * 60)
         
         # Tabular model comparison
-        fig, axes = plt.subplots(2, 2, figsize=(15, 12))
-        fig.suptitle('Music Genre Classification Results', fontsize=16, fontweight='bold')
+        fig, axes = plt.subplots(2, 2, figsize=(16, 14))
+        fig.suptitle('Music Genre Classification Results', fontsize=18, fontweight='bold', y=0.98)
+        fig.subplots_adjust(top=0.93, bottom=0.08, left=0.08, right=0.95, hspace=0.35, wspace=0.3)
         
         # Tabular model performance
         model_names = list(tabular_results.keys())
@@ -619,9 +620,8 @@ class MusicGenreClassifier:
         axes[1, 1].set_xticklabels(all_names, rotation=45)
         axes[1, 1].grid(True, alpha=0.3)
         
-        plt.tight_layout()
-        plt.savefig('internship folder task level 3/Task6_Music_Genre_Classification/model_comparison.png', 
-                   dpi=300, bbox_inches='tight')
+        plt.savefig('model_comparison.png', 
+                   dpi=300, bbox_inches='tight', facecolor='white')
         plt.show()
         
         # Plot training history
@@ -631,8 +631,9 @@ class MusicGenreClassifier:
         """
         Plot training history for CNN models
         """
-        fig, axes = plt.subplots(1, 2, figsize=(15, 6))
-        fig.suptitle('CNN Training History', fontsize=16, fontweight='bold')
+        fig, axes = plt.subplots(1, 2, figsize=(16, 8))
+        fig.suptitle('CNN Training History', fontsize=18, fontweight='bold', y=0.98)
+        fig.subplots_adjust(top=0.85, bottom=0.15, left=0.08, right=0.95, wspace=0.3)
         
         # CNN training history
         history_cnn = cnn_results['cnn_history']
@@ -654,9 +655,8 @@ class MusicGenreClassifier:
         axes[1].legend()
         axes[1].grid(True, alpha=0.3)
         
-        plt.tight_layout()
-        plt.savefig('internship folder task level 3/Task6_Music_Genre_Classification/training_history.png', 
-                   dpi=300, bbox_inches='tight')
+        plt.savefig('training_history.png', 
+                   dpi=300, bbox_inches='tight', facecolor='white')
         plt.show()
     
     def run_complete_analysis(self):

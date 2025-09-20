@@ -35,8 +35,28 @@ import xgboost as xgb
 import warnings
 warnings.filterwarnings('ignore')
 
-# Set style for better plots
-plt.style.use('seaborn-v0_8')
+# Set professional style for better plots
+plt.style.use('default')
+plt.rcParams.update({
+    'figure.facecolor': 'white',
+    'axes.facecolor': 'white',
+    'axes.grid': True,
+    'grid.alpha': 0.3,
+    'axes.spines.top': False,
+    'axes.spines.right': False,
+    'axes.linewidth': 1.2,
+    'xtick.direction': 'out',
+    'ytick.direction': 'out',
+    'xtick.major.size': 5,
+    'ytick.major.size': 5,
+    'font.size': 11,
+    'axes.titlesize': 14,
+    'axes.labelsize': 12,
+    'xtick.labelsize': 10,
+    'ytick.labelsize': 10,
+    'legend.fontsize': 10,
+    'figure.titlesize': 16
+})
 sns.set_palette("husl")
 
 class ForestCoverClassifier:
@@ -201,64 +221,81 @@ class ForestCoverClassifier:
     
     def create_exploratory_plots(self, data):
         """
-        Create comprehensive exploratory visualizations
+        Create comprehensive exploratory visualizations with improved styling
         """
-        fig, axes = plt.subplots(2, 3, figsize=(18, 12))
-        fig.suptitle('Forest Cover Data Exploration', fontsize=16, fontweight='bold')
+        fig, axes = plt.subplots(2, 3, figsize=(20, 14))
+        fig.suptitle('Forest Cover Data Exploration', fontsize=18, fontweight='bold', y=0.98)
+        fig.subplots_adjust(top=0.93, bottom=0.08, left=0.08, right=0.95, hspace=0.35, wspace=0.3)
+        
+        # Define consistent color palette
+        colors = ['#2E86AB', '#A23B72', '#F18F01', '#C73E1D', '#7209B7', '#0B6623']
         
         # Distribution of elevation
-        axes[0, 0].hist(data['elevation'], bins=30, alpha=0.7, color='skyblue', edgecolor='black')
-        axes[0, 0].set_title('Distribution of Elevation')
-        axes[0, 0].set_xlabel('Elevation (meters)')
-        axes[0, 0].set_ylabel('Frequency')
-        axes[0, 0].grid(True, alpha=0.3)
+        axes[0, 0].hist(data['elevation'], bins=30, alpha=0.8, color=colors[0], edgecolor='white', linewidth=1)
+        axes[0, 0].set_title('Distribution of Elevation', fontweight='bold', pad=15)
+        axes[0, 0].set_xlabel('Elevation (meters)', fontweight='bold')
+        axes[0, 0].set_ylabel('Frequency', fontweight='bold')
+        axes[0, 0].grid(True, alpha=0.3, linestyle='--')
         
         # Distribution of slope
-        axes[0, 1].hist(data['slope'], bins=30, alpha=0.7, color='lightgreen', edgecolor='black')
-        axes[0, 1].set_title('Distribution of Slope')
-        axes[0, 1].set_xlabel('Slope (degrees)')
-        axes[0, 1].set_ylabel('Frequency')
-        axes[0, 1].grid(True, alpha=0.3)
+        axes[0, 1].hist(data['slope'], bins=30, alpha=0.8, color=colors[1], edgecolor='white', linewidth=1)
+        axes[0, 1].set_title('Distribution of Slope', fontweight='bold', pad=15)
+        axes[0, 1].set_xlabel('Slope (degrees)', fontweight='bold')
+        axes[0, 1].set_ylabel('Frequency', fontweight='bold')
+        axes[0, 1].grid(True, alpha=0.3, linestyle='--')
         
         # Cover type distribution
         cover_counts = data['cover_type'].value_counts().sort_index()
-        axes[0, 2].bar(cover_counts.index + 1, cover_counts.values, color='orange', alpha=0.7)
-        axes[0, 2].set_title('Cover Type Distribution')
-        axes[0, 2].set_xlabel('Cover Type')
-        axes[0, 2].set_ylabel('Count')
-        axes[0, 2].grid(True, alpha=0.3)
+        bars = axes[0, 2].bar(cover_counts.index + 1, cover_counts.values, color=colors[2], alpha=0.8, edgecolor='white', linewidth=1)
+        axes[0, 2].set_title('Cover Type Distribution', fontweight='bold', pad=15)
+        axes[0, 2].set_xlabel('Cover Type', fontweight='bold')
+        axes[0, 2].set_ylabel('Count', fontweight='bold')
+        axes[0, 2].grid(True, alpha=0.3, linestyle='--', axis='y')
+        
+        # Add value labels on bars
+        for bar in bars:
+            height = bar.get_height()
+            axes[0, 2].text(bar.get_x() + bar.get_width()/2., height + 5,
+                        f'{int(height)}', ha='center', va='bottom', fontweight='bold', fontsize=9)
         
         # Elevation vs Cover Type
         data.boxplot(column='elevation', by='cover_type', ax=axes[1, 0])
-        axes[1, 0].set_title('Elevation by Cover Type')
-        axes[1, 0].set_xlabel('Cover Type')
-        axes[1, 0].set_ylabel('Elevation (meters)')
+        axes[1, 0].set_title('Elevation by Cover Type', fontweight='bold', pad=15)
+        axes[1, 0].set_xlabel('Cover Type', fontweight='bold')
+        axes[1, 0].set_ylabel('Elevation (meters)', fontweight='bold')
+        axes[1, 0].grid(True, alpha=0.3, linestyle='--')
         
         # Slope vs Cover Type
         data.boxplot(column='slope', by='cover_type', ax=axes[1, 1])
-        axes[1, 1].set_title('Slope by Cover Type')
-        axes[1, 1].set_xlabel('Cover Type')
-        axes[1, 1].set_ylabel('Slope (degrees)')
+        axes[1, 1].set_title('Slope by Cover Type', fontweight='bold', pad=15)
+        axes[1, 1].set_xlabel('Cover Type', fontweight='bold')
+        axes[1, 1].set_ylabel('Slope (degrees)', fontweight='bold')
+        axes[1, 1].grid(True, alpha=0.3, linestyle='--')
         
         # Correlation heatmap (top features)
         top_features = ['elevation', 'slope', 'hd_hydrology', 'hd_roadways', 'hd_fire']
         correlation_matrix = data[top_features + ['cover_type']].corr()
-        im = axes[1, 2].imshow(correlation_matrix, cmap='coolwarm', aspect='auto')
-        axes[1, 2].set_title('Feature Correlation Matrix')
+        im = axes[1, 2].imshow(correlation_matrix, cmap='RdBu_r', aspect='auto', vmin=-1, vmax=1)
+        axes[1, 2].set_title('Feature Correlation Matrix', fontweight='bold', pad=15)
         axes[1, 2].set_xticks(range(len(correlation_matrix.columns)))
         axes[1, 2].set_yticks(range(len(correlation_matrix.columns)))
-        axes[1, 2].set_xticklabels(correlation_matrix.columns, rotation=45)
+        axes[1, 2].set_xticklabels(correlation_matrix.columns, rotation=45, ha='right')
         axes[1, 2].set_yticklabels(correlation_matrix.columns)
         
-        # Add correlation values to heatmap
+        # Add correlation values to heatmap with better formatting
         for i in range(len(correlation_matrix.columns)):
             for j in range(len(correlation_matrix.columns)):
-                text = axes[1, 2].text(j, i, f'{correlation_matrix.iloc[i, j]:.2f}',
-                                     ha="center", va="center", color="black", fontweight='bold')
+                value = correlation_matrix.iloc[i, j]
+                color = 'white' if abs(value) > 0.5 else 'black'
+                text = axes[1, 2].text(j, i, f'{value:.2f}',
+                                     ha="center", va="center", color=color, fontweight='bold', fontsize=8)
         
-        plt.tight_layout()
-        plt.savefig('internship folder task level 2/Task3_Forest_Cover_Classification/data_exploration.png', 
-                   dpi=300, bbox_inches='tight')
+        # Add colorbar
+        cbar = plt.colorbar(im, ax=axes[1, 2], shrink=0.8)
+        cbar.set_label('Correlation Coefficient', fontweight='bold')
+        
+        plt.savefig('data_exploration.png', 
+                   dpi=300, bbox_inches='tight', facecolor='white')
         plt.show()
         
         # Print correlation with target
@@ -451,8 +488,9 @@ class ForestCoverClassifier:
         print("=" * 60)
         
         # Model comparison plot
-        fig, axes = plt.subplots(2, 2, figsize=(15, 12))
-        fig.suptitle('Model Performance Comparison', fontsize=16, fontweight='bold')
+        fig, axes = plt.subplots(2, 2, figsize=(16, 14))
+        fig.suptitle('Model Performance Comparison', fontsize=18, fontweight='bold', y=0.98)
+        fig.subplots_adjust(top=0.93, bottom=0.08, left=0.08, right=0.95, hspace=0.35, wspace=0.3)
         
         # Extract metrics
         model_names = list(results.keys())
@@ -489,9 +527,8 @@ class ForestCoverClassifier:
         axes[1, 1].tick_params(axis='x', rotation=45)
         axes[1, 1].grid(True, alpha=0.3)
         
-        plt.tight_layout()
-        plt.savefig('internship folder task level 2/Task3_Forest_Cover_Classification/model_comparison.png', 
-                   dpi=300, bbox_inches='tight')
+        plt.savefig('model_comparison.png', 
+                   dpi=300, bbox_inches='tight', facecolor='white')
         plt.show()
         
         # Confusion matrices for top models
@@ -510,8 +547,9 @@ class ForestCoverClassifier:
         # Get top 3 models by F1-score
         top_models = sorted(results.items(), key=lambda x: x[1]['f1'], reverse=True)[:3]
         
-        fig, axes = plt.subplots(1, 3, figsize=(18, 6))
-        fig.suptitle('Confusion Matrices - Top 3 Models', fontsize=16, fontweight='bold')
+        fig, axes = plt.subplots(1, 3, figsize=(20, 8))
+        fig.suptitle('Confusion Matrices - Top 3 Models', fontsize=18, fontweight='bold', y=0.98)
+        fig.subplots_adjust(top=0.85, bottom=0.15, left=0.08, right=0.95, wspace=0.3)
         
         for i, (name, result) in enumerate(top_models):
             cm = confusion_matrix(self.y_test, result['predictions'])
@@ -539,9 +577,8 @@ class ForestCoverClassifier:
             axes[i].set_xticks(range(len(np.unique(self.y_test))))
             axes[i].set_yticks(range(len(np.unique(self.y_test))))
         
-        plt.tight_layout()
-        plt.savefig('internship folder task level 2/Task3_Forest_Cover_Classification/confusion_matrices.png', 
-                   dpi=300, bbox_inches='tight')
+        plt.savefig('confusion_matrices.png', 
+                   dpi=300, bbox_inches='tight', facecolor='white')
         plt.show()
     
     def plot_feature_importance(self, results):
@@ -550,8 +587,9 @@ class ForestCoverClassifier:
         """
         tree_models = ['Random Forest', 'Decision Tree', 'XGBoost']
         
-        fig, axes = plt.subplots(1, 3, figsize=(18, 6))
-        fig.suptitle('Feature Importance - Tree-Based Models', fontsize=16, fontweight='bold')
+        fig, axes = plt.subplots(1, 3, figsize=(20, 8))
+        fig.suptitle('Feature Importance - Tree-Based Models', fontsize=18, fontweight='bold', y=0.98)
+        fig.subplots_adjust(top=0.85, bottom=0.15, left=0.08, right=0.95, wspace=0.3)
         
         for i, model_name in enumerate(tree_models):
             if model_name in results:
@@ -572,17 +610,17 @@ class ForestCoverClassifier:
                     axes[i].set_xlabel('Importance')
                     axes[i].grid(True, alpha=0.3)
         
-        plt.tight_layout()
-        plt.savefig('internship folder task level 2/Task3_Forest_Cover_Classification/feature_importance.png', 
-                   dpi=300, bbox_inches='tight')
+        plt.savefig('feature_importance.png', 
+                   dpi=300, bbox_inches='tight', facecolor='white')
         plt.show()
     
     def plot_cv_scores(self, results):
         """
         Plot cross-validation scores
         """
-        fig, ax = plt.subplots(1, 1, figsize=(12, 6))
-        fig.suptitle('Cross-Validation Scores', fontsize=16, fontweight='bold')
+        fig, ax = plt.subplots(1, 1, figsize=(14, 8))
+        fig.suptitle('Cross-Validation Scores', fontsize=18, fontweight='bold', y=0.98)
+        fig.subplots_adjust(top=0.85, bottom=0.15, left=0.08, right=0.95)
         
         model_names = list(results.keys())
         cv_means = [results[name]['cv_mean'] for name in model_names]
@@ -602,9 +640,8 @@ class ForestCoverClassifier:
             ax.text(bar.get_x() + bar.get_width()/2., height + std + 0.01,
                    f'{mean:.3f}', ha='center', va='bottom')
         
-        plt.tight_layout()
-        plt.savefig('internship folder task level 2/Task3_Forest_Cover_Classification/cv_scores.png', 
-                   dpi=300, bbox_inches='tight')
+        plt.savefig('cv_scores.png',
+                   dpi=300, bbox_inches='tight', facecolor='white')
         plt.show()
     
     def generate_classification_report(self, results):

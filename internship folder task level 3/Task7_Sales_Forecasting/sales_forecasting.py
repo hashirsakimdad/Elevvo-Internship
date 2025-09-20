@@ -164,8 +164,9 @@ class SalesForecaster:
         """
         Create comprehensive exploratory visualizations
         """
-        fig, axes = plt.subplots(2, 3, figsize=(18, 12))
-        fig.suptitle('Sales Data Exploration', fontsize=16, fontweight='bold')
+        fig, axes = plt.subplots(2, 3, figsize=(20, 14))
+        fig.suptitle('Sales Data Exploration', fontsize=18, fontweight='bold', y=0.98)
+        fig.subplots_adjust(top=0.93, bottom=0.08, left=0.08, right=0.95, hspace=0.35, wspace=0.3)
         
         # Time series plot
         axes[0, 0].plot(data['date'], data['weekly_sales'], alpha=0.7, color='blue')
@@ -213,9 +214,8 @@ class SalesForecaster:
         axes[1, 2].set_ylabel('Average Weekly Sales ($)')
         axes[1, 2].grid(True, alpha=0.3)
         
-        plt.tight_layout()
-        plt.savefig('internship folder task level 3/Task7_Sales_Forecasting/data_exploration.png', 
-                   dpi=300, bbox_inches='tight')
+        plt.savefig('data_exploration.png', 
+                   dpi=300, bbox_inches='tight', facecolor='white')
         plt.show()
     
     def create_time_features(self, data):
@@ -282,8 +282,9 @@ class SalesForecaster:
         decomposition = seasonal_decompose(ts_data, model='additive', period=52)
         
         # Plot decomposition
-        fig, axes = plt.subplots(4, 1, figsize=(15, 12))
-        fig.suptitle('Seasonal Decomposition of Sales', fontsize=16, fontweight='bold')
+        fig, axes = plt.subplots(4, 1, figsize=(16, 14))
+        fig.suptitle('Seasonal Decomposition of Sales', fontsize=18, fontweight='bold', y=0.98)
+        fig.subplots_adjust(top=0.93, bottom=0.08, left=0.08, right=0.95, hspace=0.35)
         
         decomposition.observed.plot(ax=axes[0], title='Original')
         decomposition.trend.plot(ax=axes[1], title='Trend')
@@ -293,9 +294,8 @@ class SalesForecaster:
         for ax in axes:
             ax.grid(True, alpha=0.3)
         
-        plt.tight_layout()
-        plt.savefig('internship folder task level 3/Task7_Sales_Forecasting/seasonal_decomposition.png', 
-                   dpi=300, bbox_inches='tight')
+        plt.savefig('seasonal_decomposition.png', 
+                   dpi=300, bbox_inches='tight', facecolor='white')
         plt.show()
         
         # Stationarity test
@@ -422,8 +422,9 @@ class SalesForecaster:
         print("=" * 60)
         
         # Model comparison
-        fig, axes = plt.subplots(2, 2, figsize=(15, 12))
-        fig.suptitle('Sales Forecasting Results', fontsize=16, fontweight='bold')
+        fig, axes = plt.subplots(2, 2, figsize=(16, 14))
+        fig.suptitle('Sales Forecasting Results', fontsize=18, fontweight='bold', y=0.98)
+        fig.subplots_adjust(top=0.93, bottom=0.08, left=0.08, right=0.95, hspace=0.35, wspace=0.3)
         
         # Extract metrics
         model_names = list(results.keys())
@@ -460,9 +461,8 @@ class SalesForecaster:
         axes[1, 1].tick_params(axis='x', rotation=45)
         axes[1, 1].grid(True, alpha=0.3)
         
-        plt.tight_layout()
-        plt.savefig('internship folder task level 3/Task7_Sales_Forecasting/model_comparison.png', 
-                   dpi=300, bbox_inches='tight')
+        plt.savefig('model_comparison.png', 
+                   dpi=300, bbox_inches='tight', facecolor='white')
         plt.show()
         
         # Time series plots
@@ -475,8 +475,9 @@ class SalesForecaster:
         """
         Plot actual vs predicted values over time
         """
-        fig, axes = plt.subplots(2, 2, figsize=(18, 12))
-        fig.suptitle('Actual vs Predicted Sales Over Time', fontsize=16, fontweight='bold')
+        fig, axes = plt.subplots(2, 2, figsize=(20, 14))
+        fig.suptitle('Actual vs Predicted Sales Over Time', fontsize=18, fontweight='bold', y=0.98)
+        fig.subplots_adjust(top=0.93, bottom=0.08, left=0.08, right=0.95, hspace=0.35, wspace=0.3)
         
         # Get test dates
         test_dates = self.X_test.index
@@ -495,9 +496,8 @@ class SalesForecaster:
             ax.grid(True, alpha=0.3)
             ax.tick_params(axis='x', rotation=45)
         
-        plt.tight_layout()
-        plt.savefig('internship folder task level 3/Task7_Sales_Forecasting/time_series_predictions.png', 
-                   dpi=300, bbox_inches='tight')
+        plt.savefig('time_series_predictions.png', 
+                   dpi=300, bbox_inches='tight', facecolor='white')
         plt.show()
     
     def plot_feature_importance(self, results):
@@ -506,8 +506,9 @@ class SalesForecaster:
         """
         tree_models = ['Random Forest', 'XGBoost', 'LightGBM']
         
-        fig, axes = plt.subplots(1, 3, figsize=(18, 6))
-        fig.suptitle('Feature Importance Analysis', fontsize=16, fontweight='bold')
+        fig, axes = plt.subplots(1, 3, figsize=(20, 8))
+        fig.suptitle('Feature Importance Analysis', fontsize=18, fontweight='bold', y=0.98)
+        fig.subplots_adjust(top=0.85, bottom=0.15, left=0.08, right=0.95, wspace=0.3)
         
         for i, model_name in enumerate(tree_models):
             if model_name in results:
@@ -528,9 +529,8 @@ class SalesForecaster:
                     axes[i].set_xlabel('Importance')
                     axes[i].grid(True, alpha=0.3)
         
-        plt.tight_layout()
-        plt.savefig('internship folder task level 3/Task7_Sales_Forecasting/feature_importance.png', 
-                   dpi=300, bbox_inches='tight')
+        plt.savefig('feature_importance.png', 
+                   dpi=300, bbox_inches='tight', facecolor='white')
         plt.show()
     
     def generate_forecast(self, data, n_periods=12):
@@ -573,7 +573,8 @@ class SalesForecaster:
             print(f"   Week {i+1} ({date.strftime('%Y-%m-%d')}): ${forecast:,.2f}")
         
         # Plot forecast
-        plt.figure(figsize=(15, 8))
+        plt.figure(figsize=(16, 10))
+        plt.subplots_adjust(left=0.08, right=0.95, top=0.85, bottom=0.15)
         
         # Plot historical data
         plt.plot(data['date'], data['weekly_sales'], label='Historical Sales', alpha=0.7, color='blue')
@@ -588,9 +589,8 @@ class SalesForecaster:
         plt.grid(True, alpha=0.3)
         plt.tick_params(axis='x', rotation=45)
         
-        plt.tight_layout()
-        plt.savefig('internship folder task level 3/Task7_Sales_Forecasting/sales_forecast.png', 
-                   dpi=300, bbox_inches='tight')
+        plt.savefig('sales_forecast.png', 
+                   dpi=300, bbox_inches='tight', facecolor='white')
         plt.show()
         
         return forecasts, forecast_dates

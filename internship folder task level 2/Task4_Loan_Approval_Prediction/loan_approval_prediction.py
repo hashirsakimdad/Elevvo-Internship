@@ -233,8 +233,9 @@ class LoanApprovalPredictor:
         """
         Create comprehensive exploratory visualizations
         """
-        fig, axes = plt.subplots(3, 3, figsize=(18, 15))
-        fig.suptitle('Loan Approval Data Exploration', fontsize=16, fontweight='bold')
+        fig, axes = plt.subplots(3, 3, figsize=(20, 18))
+        fig.suptitle('Loan Approval Data Exploration', fontsize=18, fontweight='bold', y=0.98)
+        fig.subplots_adjust(top=0.93, bottom=0.08, left=0.08, right=0.95, hspace=0.35, wspace=0.3)
         
         # Distribution of applicant income
         axes[0, 0].hist(data['applicant_income'], bins=30, alpha=0.7, color='skyblue', edgecolor='black')
@@ -312,9 +313,8 @@ class LoanApprovalPredictor:
         axes[2, 2].legend(['Rejected', 'Approved'])
         axes[2, 2].grid(True, alpha=0.3)
         
-        plt.tight_layout()
-        plt.savefig('internship folder task level 2/Task4_Loan_Approval_Prediction/data_exploration.png', 
-                   dpi=300, bbox_inches='tight')
+        plt.savefig('data_exploration.png', 
+                   dpi=300, bbox_inches='tight', facecolor='white')
         plt.show()
     
     def preprocess_data(self, data):
@@ -517,8 +517,9 @@ class LoanApprovalPredictor:
         print("=" * 60)
         
         # Model comparison across different sampling techniques
-        fig, axes = plt.subplots(2, 3, figsize=(18, 12))
-        fig.suptitle('Model Performance Comparison Across Sampling Techniques', fontsize=16, fontweight='bold')
+        fig, axes = plt.subplots(2, 3, figsize=(20, 14))
+        fig.suptitle('Model Performance Comparison Across Sampling Techniques', fontsize=18, fontweight='bold', y=0.98)
+        fig.subplots_adjust(top=0.93, bottom=0.08, left=0.08, right=0.95, hspace=0.35, wspace=0.3)
         
         # Extract metrics for plotting
         datasets = list(results.keys())
@@ -551,9 +552,8 @@ class LoanApprovalPredictor:
             ax.legend()
             ax.grid(True, alpha=0.3)
         
-        plt.tight_layout()
-        plt.savefig('internship folder task level 2/Task4_Loan_Approval_Prediction/model_comparison.png', 
-                   dpi=300, bbox_inches='tight')
+        plt.savefig('model_comparison.png', 
+                   dpi=300, bbox_inches='tight', facecolor='white')
         plt.show()
         
         # Confusion matrices for best models
@@ -569,8 +569,9 @@ class LoanApprovalPredictor:
         """
         Plot confusion matrices for the best models
         """
-        fig, axes = plt.subplots(2, 2, figsize=(15, 12))
-        fig.suptitle('Confusion Matrices - Best Models', fontsize=16, fontweight='bold')
+        fig, axes = plt.subplots(2, 2, figsize=(16, 14))
+        fig.suptitle('Confusion Matrices - Best Models', fontsize=18, fontweight='bold', y=0.98)
+        fig.subplots_adjust(top=0.93, bottom=0.08, left=0.08, right=0.95, hspace=0.35, wspace=0.3)
         
         # Get best model from each dataset
         best_models = []
@@ -608,17 +609,17 @@ class LoanApprovalPredictor:
             ax.set_xticklabels(['Rejected', 'Approved'])
             ax.set_yticklabels(['Rejected', 'Approved'])
         
-        plt.tight_layout()
-        plt.savefig('internship folder task level 2/Task4_Loan_Approval_Prediction/confusion_matrices.png', 
-                   dpi=300, bbox_inches='tight')
+        plt.savefig('confusion_matrices.png', 
+                   dpi=300, bbox_inches='tight', facecolor='white')
         plt.show()
     
     def plot_roc_curves(self, results):
         """
         Plot ROC curves for the best models
         """
-        fig, ax = plt.subplots(1, 1, figsize=(10, 8))
-        fig.suptitle('ROC Curves - Best Models', fontsize=16, fontweight='bold')
+        fig, ax = plt.subplots(1, 1, figsize=(12, 10))
+        fig.suptitle('ROC Curves - Best Models', fontsize=18, fontweight='bold', y=0.98)
+        fig.subplots_adjust(top=0.85, bottom=0.15, left=0.08, right=0.95)
         
         # Get best model from each dataset
         for dataset_name, dataset_results in results.items():
@@ -647,17 +648,17 @@ class LoanApprovalPredictor:
         ax.legend()
         ax.grid(True, alpha=0.3)
         
-        plt.tight_layout()
-        plt.savefig('internship folder task level 2/Task4_Loan_Approval_Prediction/roc_curves.png', 
-                   dpi=300, bbox_inches='tight')
+        plt.savefig('roc_curves.png', 
+                   dpi=300, bbox_inches='tight', facecolor='white')
         plt.show()
     
     def plot_precision_recall_curves(self, results):
         """
         Plot Precision-Recall curves for the best models
         """
-        fig, ax = plt.subplots(1, 1, figsize=(10, 8))
-        fig.suptitle('Precision-Recall Curves - Best Models', fontsize=16, fontweight='bold')
+        fig, ax = plt.subplots(1, 1, figsize=(12, 10))
+        fig.suptitle('Precision-Recall Curves - Best Models', fontsize=18, fontweight='bold', y=0.98)
+        fig.subplots_adjust(top=0.85, bottom=0.15, left=0.08, right=0.95)
         
         # Get best model from each dataset
         for dataset_name, dataset_results in results.items():
@@ -682,9 +683,8 @@ class LoanApprovalPredictor:
         ax.legend()
         ax.grid(True, alpha=0.3)
         
-        plt.tight_layout()
-        plt.savefig('internship folder task level 2/Task4_Loan_Approval_Prediction/precision_recall_curves.png', 
-                   dpi=300, bbox_inches='tight')
+        plt.savefig('precision_recall_curves.png', 
+                   dpi=300, bbox_inches='tight', facecolor='white')
         plt.show()
     
     def generate_classification_report(self, results):

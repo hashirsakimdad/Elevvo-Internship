@@ -31,8 +31,28 @@ from sklearn.preprocessing import StandardScaler
 import warnings
 warnings.filterwarnings('ignore')
 
-# Set style for better plots
-plt.style.use('seaborn-v0_8')
+# Set professional style for better plots
+plt.style.use('default')
+plt.rcParams.update({
+    'figure.facecolor': 'white',
+    'axes.facecolor': 'white',
+    'axes.grid': True,
+    'grid.alpha': 0.3,
+    'axes.spines.top': False,
+    'axes.spines.right': False,
+    'axes.linewidth': 1.2,
+    'xtick.direction': 'out',
+    'ytick.direction': 'out',
+    'xtick.major.size': 5,
+    'ytick.major.size': 5,
+    'font.size': 11,
+    'axes.titlesize': 14,
+    'axes.labelsize': 12,
+    'xtick.labelsize': 10,
+    'ytick.labelsize': 10,
+    'legend.fontsize': 10,
+    'figure.titlesize': 16
+})
 sns.set_palette("husl")
 
 class StudentScorePredictor:
@@ -143,65 +163,84 @@ class StudentScorePredictor:
     
     def create_exploratory_plots(self, data):
         """
-        Create comprehensive exploratory visualizations
+        Create comprehensive exploratory visualizations with improved styling
         """
-        fig, axes = plt.subplots(2, 3, figsize=(18, 12))
-        fig.suptitle('Student Performance Data Exploration', fontsize=16, fontweight='bold')
+        fig, axes = plt.subplots(2, 3, figsize=(20, 14))
+        fig.suptitle('Student Performance Data Exploration', fontsize=18, fontweight='bold', y=0.98)
+        fig.subplots_adjust(top=0.93, bottom=0.08, left=0.08, right=0.95, hspace=0.35, wspace=0.3)
+        
+        # Define consistent color palette
+        colors = ['#2E86AB', '#A23B72', '#F18F01', '#C73E1D', '#7209B7', '#0B6623']
         
         # Distribution of study hours
-        axes[0, 0].hist(data['study_hours'], bins=20, alpha=0.7, color='skyblue', edgecolor='black')
-        axes[0, 0].set_title('Distribution of Study Hours')
-        axes[0, 0].set_xlabel('Study Hours')
-        axes[0, 0].set_ylabel('Frequency')
-        axes[0, 0].grid(True, alpha=0.3)
+        axes[0, 0].hist(data['study_hours'], bins=20, alpha=0.8, color=colors[0], edgecolor='white', linewidth=1)
+        axes[0, 0].set_title('Distribution of Study Hours', fontweight='bold', pad=15)
+        axes[0, 0].set_xlabel('Study Hours (per day)', fontweight='bold')
+        axes[0, 0].set_ylabel('Frequency', fontweight='bold')
+        axes[0, 0].grid(True, alpha=0.3, linestyle='--')
         
         # Distribution of final scores
-        axes[0, 1].hist(data['final_score'], bins=20, alpha=0.7, color='lightgreen', edgecolor='black')
-        axes[0, 1].set_title('Distribution of Final Scores')
-        axes[0, 1].set_xlabel('Final Score')
-        axes[0, 1].set_ylabel('Frequency')
-        axes[0, 1].grid(True, alpha=0.3)
+        axes[0, 1].hist(data['final_score'], bins=20, alpha=0.8, color=colors[1], edgecolor='white', linewidth=1)
+        axes[0, 1].set_title('Distribution of Final Scores', fontweight='bold', pad=15)
+        axes[0, 1].set_xlabel('Final Score (%)', fontweight='bold')
+        axes[0, 1].set_ylabel('Frequency', fontweight='bold')
+        axes[0, 1].grid(True, alpha=0.3, linestyle='--')
         
         # Study hours vs Final score scatter plot
-        axes[0, 2].scatter(data['study_hours'], data['final_score'], alpha=0.6, color='orange')
-        axes[0, 2].set_title('Study Hours vs Final Score')
-        axes[0, 2].set_xlabel('Study Hours')
-        axes[0, 2].set_ylabel('Final Score')
-        axes[0, 2].grid(True, alpha=0.3)
+        axes[0, 2].scatter(data['study_hours'], data['final_score'], alpha=0.7, color=colors[2], s=60, edgecolors='white', linewidth=0.5)
+        axes[0, 2].set_title('Study Hours vs Final Score', fontweight='bold', pad=15)
+        axes[0, 2].set_xlabel('Study Hours (per day)', fontweight='bold')
+        axes[0, 2].set_ylabel('Final Score (%)', fontweight='bold')
+        axes[0, 2].grid(True, alpha=0.3, linestyle='--')
+        
+        # Add trend line
+        z = np.polyfit(data['study_hours'], data['final_score'], 1)
+        p = np.poly1d(z)
+        axes[0, 2].plot(data['study_hours'], p(data['study_hours']), "r--", alpha=0.8, linewidth=2)
         
         # Correlation heatmap
         correlation_matrix = data.corr()
-        im = axes[1, 0].imshow(correlation_matrix, cmap='coolwarm', aspect='auto')
-        axes[1, 0].set_title('Feature Correlation Matrix')
+        im = axes[1, 0].imshow(correlation_matrix, cmap='RdBu_r', aspect='auto', vmin=-1, vmax=1)
+        axes[1, 0].set_title('Feature Correlation Matrix', fontweight='bold', pad=15)
         axes[1, 0].set_xticks(range(len(correlation_matrix.columns)))
         axes[1, 0].set_yticks(range(len(correlation_matrix.columns)))
-        axes[1, 0].set_xticklabels(correlation_matrix.columns, rotation=45)
+        axes[1, 0].set_xticklabels(correlation_matrix.columns, rotation=45, ha='right')
         axes[1, 0].set_yticklabels(correlation_matrix.columns)
         
-        # Add correlation values to heatmap
+        # Add correlation values to heatmap with better formatting
         for i in range(len(correlation_matrix.columns)):
             for j in range(len(correlation_matrix.columns)):
-                text = axes[1, 0].text(j, i, f'{correlation_matrix.iloc[i, j]:.2f}',
-                                     ha="center", va="center", color="black", fontweight='bold')
+                value = correlation_matrix.iloc[i, j]
+                color = 'white' if abs(value) > 0.5 else 'black'
+                text = axes[1, 0].text(j, i, f'{value:.2f}',
+                                     ha="center", va="center", color=color, fontweight='bold', fontsize=10)
+        
+        # Add colorbar
+        cbar = plt.colorbar(im, ax=axes[1, 0], shrink=0.8)
+        cbar.set_label('Correlation Coefficient', fontweight='bold')
         
         # Box plots for all features
         data_melted = data.melt()
-        sns.boxplot(data=data_melted, x='variable', y='value', ax=axes[1, 1])
-        axes[1, 1].set_title('Box Plots of All Features')
-        axes[1, 1].set_xlabel('Features')
-        axes[1, 1].set_ylabel('Values')
+        sns.boxplot(data=data_melted, x='variable', y='value', ax=axes[1, 1], palette=colors[:3])
+        axes[1, 1].set_title('Box Plots of All Features', fontweight='bold', pad=15)
+        axes[1, 1].set_xlabel('Features', fontweight='bold')
+        axes[1, 1].set_ylabel('Values', fontweight='bold')
         axes[1, 1].tick_params(axis='x', rotation=45)
         
         # Sleep hours vs Final score
-        axes[1, 2].scatter(data['sleep_hours'], data['final_score'], alpha=0.6, color='purple')
-        axes[1, 2].set_title('Sleep Hours vs Final Score')
-        axes[1, 2].set_xlabel('Sleep Hours')
-        axes[1, 2].set_ylabel('Final Score')
-        axes[1, 2].grid(True, alpha=0.3)
+        axes[1, 2].scatter(data['sleep_hours'], data['final_score'], alpha=0.7, color=colors[3], s=60, edgecolors='white', linewidth=0.5)
+        axes[1, 2].set_title('Sleep Hours vs Final Score', fontweight='bold', pad=15)
+        axes[1, 2].set_xlabel('Sleep Hours (per night)', fontweight='bold')
+        axes[1, 2].set_ylabel('Final Score (%)', fontweight='bold')
+        axes[1, 2].grid(True, alpha=0.3, linestyle='--')
         
-        plt.tight_layout()
-        plt.savefig('internship folder task level 1/Task1_Student_Score_Prediction/data_exploration.png', 
-                   dpi=300, bbox_inches='tight')
+        # Add trend line
+        z = np.polyfit(data['sleep_hours'], data['final_score'], 1)
+        p = np.poly1d(z)
+        axes[1, 2].plot(data['sleep_hours'], p(data['sleep_hours']), "r--", alpha=0.8, linewidth=2)
+        
+        plt.savefig('data_exploration.png', 
+                   dpi=300, bbox_inches='tight', facecolor='white')
         plt.show()
         
         # Print correlation with target
@@ -319,76 +358,79 @@ class StudentScorePredictor:
     
     def visualize_predictions(self, y_pred_linear, y_pred_poly=None):
         """
-        Visualize predictions and model performance
+        Visualize predictions and model performance with improved styling
         """
         print("\n" + "=" * 60)
         print("VISUALIZATION OF PREDICTIONS")
         print("=" * 60)
         
-        fig, axes = plt.subplots(2, 2, figsize=(15, 12))
-        fig.suptitle('Student Score Prediction Results', fontsize=16, fontweight='bold')
+        fig, axes = plt.subplots(2, 2, figsize=(16, 14))
+        fig.suptitle('Student Score Prediction Results', fontsize=18, fontweight='bold', y=0.98)
+        fig.subplots_adjust(top=0.93, bottom=0.08, left=0.08, right=0.95, hspace=0.35, wspace=0.3)
+        
+        # Define consistent color palette
+        colors = ['#2E86AB', '#A23B72', '#F18F01', '#C73E1D', '#7209B7', '#0B6623']
         
         # Actual vs Predicted (Linear)
-        axes[0, 0].scatter(self.y_test, y_pred_linear, alpha=0.6, color='blue')
+        axes[0, 0].scatter(self.y_test, y_pred_linear, alpha=0.7, color=colors[0], s=80, edgecolors='white', linewidth=0.5)
         axes[0, 0].plot([self.y_test.min(), self.y_test.max()], 
-                       [self.y_test.min(), self.y_test.max()], 'r--', lw=2)
-        axes[0, 0].set_xlabel('Actual Final Score')
-        axes[0, 0].set_ylabel('Predicted Final Score')
-        axes[0, 0].set_title('Linear Regression: Actual vs Predicted')
-        axes[0, 0].grid(True, alpha=0.3)
+                       [self.y_test.min(), self.y_test.max()], 'r--', lw=3, alpha=0.8)
+        axes[0, 0].set_xlabel('Actual Final Score (%)', fontweight='bold')
+        axes[0, 0].set_ylabel('Predicted Final Score (%)', fontweight='bold')
+        axes[0, 0].set_title('Linear Regression: Actual vs Predicted', fontweight='bold', pad=15)
+        axes[0, 0].grid(True, alpha=0.3, linestyle='--')
         
-        # Add R² score to plot
+        # Add R² score to plot with better styling
         r2_linear = r2_score(self.y_test, y_pred_linear)
         axes[0, 0].text(0.05, 0.95, f'R² = {r2_linear:.3f}', 
-                       transform=axes[0, 0].transAxes, fontsize=12,
-                       bbox=dict(boxstyle='round', facecolor='white', alpha=0.8))
+                       transform=axes[0, 0].transAxes, fontsize=14, fontweight='bold',
+                       bbox=dict(boxstyle='round,pad=0.5', facecolor='white', alpha=0.9, edgecolor='gray'))
         
         # Residuals plot (Linear)
         residuals_linear = self.y_test - y_pred_linear
-        axes[0, 1].scatter(y_pred_linear, residuals_linear, alpha=0.6, color='green')
-        axes[0, 1].axhline(y=0, color='r', linestyle='--')
-        axes[0, 1].set_xlabel('Predicted Final Score')
-        axes[0, 1].set_ylabel('Residuals')
-        axes[0, 1].set_title('Linear Regression: Residuals Plot')
-        axes[0, 1].grid(True, alpha=0.3)
+        axes[0, 1].scatter(y_pred_linear, residuals_linear, alpha=0.7, color=colors[1], s=80, edgecolors='white', linewidth=0.5)
+        axes[0, 1].axhline(y=0, color='red', linestyle='--', linewidth=2, alpha=0.8)
+        axes[0, 1].set_xlabel('Predicted Final Score (%)', fontweight='bold')
+        axes[0, 1].set_ylabel('Residuals', fontweight='bold')
+        axes[0, 1].set_title('Linear Regression: Residuals Plot', fontweight='bold', pad=15)
+        axes[0, 1].grid(True, alpha=0.3, linestyle='--')
         
         # Study hours vs predictions
         if self.X_test.shape[1] == 1:  # Only if we're using study_hours
-            axes[1, 0].scatter(self.X_test.iloc[:, 0], self.y_test, alpha=0.6, 
-                             color='orange', label='Actual')
-            axes[1, 0].scatter(self.X_test.iloc[:, 0], y_pred_linear, alpha=0.6, 
-                             color='red', label='Predicted')
-            axes[1, 0].set_xlabel('Study Hours')
-            axes[1, 0].set_ylabel('Final Score')
-            axes[1, 0].set_title('Study Hours vs Final Score')
-            axes[1, 0].legend()
-            axes[1, 0].grid(True, alpha=0.3)
+            axes[1, 0].scatter(self.X_test.iloc[:, 0], self.y_test, alpha=0.7, 
+                             color=colors[2], label='Actual', s=80, edgecolors='white', linewidth=0.5)
+            axes[1, 0].scatter(self.X_test.iloc[:, 0], y_pred_linear, alpha=0.7, 
+                             color=colors[3], label='Predicted', s=80, edgecolors='white', linewidth=0.5)
+            axes[1, 0].set_xlabel('Study Hours (per day)', fontweight='bold')
+            axes[1, 0].set_ylabel('Final Score (%)', fontweight='bold')
+            axes[1, 0].set_title('Study Hours vs Final Score', fontweight='bold', pad=15)
+            axes[1, 0].legend(fontsize=12, frameon=True, fancybox=True, shadow=True)
+            axes[1, 0].grid(True, alpha=0.3, linestyle='--')
         
         # Model comparison (if polynomial model exists)
         if y_pred_poly is not None:
-            axes[1, 1].scatter(self.y_test, y_pred_poly, alpha=0.6, color='purple')
+            axes[1, 1].scatter(self.y_test, y_pred_poly, alpha=0.7, color=colors[4], s=80, edgecolors='white', linewidth=0.5)
             axes[1, 1].plot([self.y_test.min(), self.y_test.max()], 
-                           [self.y_test.min(), self.y_test.max()], 'r--', lw=2)
-            axes[1, 1].set_xlabel('Actual Final Score')
-            axes[1, 1].set_ylabel('Predicted Final Score')
-            axes[1, 1].set_title('Polynomial Regression: Actual vs Predicted')
-            axes[1, 1].grid(True, alpha=0.3)
+                           [self.y_test.min(), self.y_test.max()], 'r--', lw=3, alpha=0.8)
+            axes[1, 1].set_xlabel('Actual Final Score (%)', fontweight='bold')
+            axes[1, 1].set_ylabel('Predicted Final Score (%)', fontweight='bold')
+            axes[1, 1].set_title('Polynomial Regression: Actual vs Predicted', fontweight='bold', pad=15)
+            axes[1, 1].grid(True, alpha=0.3, linestyle='--')
             
             r2_poly = r2_score(self.y_test, y_pred_poly)
             axes[1, 1].text(0.05, 0.95, f'R² = {r2_poly:.3f}', 
-                           transform=axes[1, 1].transAxes, fontsize=12,
-                           bbox=dict(boxstyle='round', facecolor='white', alpha=0.8))
+                           transform=axes[1, 1].transAxes, fontsize=14, fontweight='bold',
+                           bbox=dict(boxstyle='round,pad=0.5', facecolor='white', alpha=0.9, edgecolor='gray'))
         else:
             # Distribution of residuals
-            axes[1, 1].hist(residuals_linear, bins=20, alpha=0.7, color='lightblue', edgecolor='black')
-            axes[1, 1].set_xlabel('Residuals')
-            axes[1, 1].set_ylabel('Frequency')
-            axes[1, 1].set_title('Distribution of Residuals')
-            axes[1, 1].grid(True, alpha=0.3)
+            axes[1, 1].hist(residuals_linear, bins=20, alpha=0.8, color=colors[5], edgecolor='white', linewidth=1)
+            axes[1, 1].set_xlabel('Residuals', fontweight='bold')
+            axes[1, 1].set_ylabel('Frequency', fontweight='bold')
+            axes[1, 1].set_title('Distribution of Residuals', fontweight='bold', pad=15)
+            axes[1, 1].grid(True, alpha=0.3, linestyle='--')
         
-        plt.tight_layout()
-        plt.savefig('internship folder task level 1/Task1_Student_Score_Prediction/prediction_results.png', 
-                   dpi=300, bbox_inches='tight')
+        plt.savefig('prediction_results.png', 
+                   dpi=300, bbox_inches='tight', facecolor='white')
         plt.show()
     
     def experiment_with_features(self, data):
@@ -453,10 +495,14 @@ class StudentScorePredictor:
     
     def plot_feature_comparison(self, results):
         """
-        Plot comparison of different feature combinations
+        Plot comparison of different feature combinations with improved styling
         """
-        fig, axes = plt.subplots(1, 3, figsize=(18, 6))
-        fig.suptitle('Feature Combination Comparison', fontsize=16, fontweight='bold')
+        fig, axes = plt.subplots(1, 3, figsize=(20, 8))
+        fig.suptitle('Feature Combination Comparison', fontsize=18, fontweight='bold', y=0.98)
+        fig.subplots_adjust(top=0.85, bottom=0.15, left=0.08, right=0.95, wspace=0.3)
+        
+        # Define consistent color palette
+        colors = ['#2E86AB', '#A23B72', '#F18F01', '#C73E1D', '#7209B7', '#0B6623', '#FF6B6B', '#4ECDC4']
         
         # Extract data for plotting
         feature_names = [', '.join(r['features']) for r in results]
@@ -465,35 +511,52 @@ class StudentScorePredictor:
         mae_scores = [r['mae'] for r in results]
         
         # MSE comparison
-        axes[0].bar(range(len(feature_names)), mse_scores, color='skyblue', alpha=0.7)
-        axes[0].set_title('Mean Squared Error Comparison')
-        axes[0].set_xlabel('Feature Combinations')
-        axes[0].set_ylabel('MSE')
+        bars1 = axes[0].bar(range(len(feature_names)), mse_scores, color=colors[0], alpha=0.8, edgecolor='white', linewidth=1)
+        axes[0].set_title('Mean Squared Error Comparison', fontweight='bold', pad=15)
+        axes[0].set_xlabel('Feature Combinations', fontweight='bold')
+        axes[0].set_ylabel('MSE', fontweight='bold')
         axes[0].set_xticks(range(len(feature_names)))
-        axes[0].set_xticklabels([f"Combo {i+1}" for i in range(len(feature_names))], rotation=45)
-        axes[0].grid(True, alpha=0.3)
+        axes[0].set_xticklabels([f"Combo {i+1}" for i in range(len(feature_names))], rotation=45, ha='right')
+        axes[0].grid(True, alpha=0.3, linestyle='--', axis='y')
+        
+        # Add value labels on bars
+        for i, bar in enumerate(bars1):
+            height = bar.get_height()
+            axes[0].text(bar.get_x() + bar.get_width()/2., height + 0.5,
+                        f'{height:.1f}', ha='center', va='bottom', fontweight='bold', fontsize=9)
         
         # R² comparison
-        axes[1].bar(range(len(feature_names)), r2_scores, color='lightgreen', alpha=0.7)
-        axes[1].set_title('R² Score Comparison')
-        axes[1].set_xlabel('Feature Combinations')
-        axes[1].set_ylabel('R² Score')
+        bars2 = axes[1].bar(range(len(feature_names)), r2_scores, color=colors[1], alpha=0.8, edgecolor='white', linewidth=1)
+        axes[1].set_title('R² Score Comparison', fontweight='bold', pad=15)
+        axes[1].set_xlabel('Feature Combinations', fontweight='bold')
+        axes[1].set_ylabel('R² Score', fontweight='bold')
         axes[1].set_xticks(range(len(feature_names)))
-        axes[1].set_xticklabels([f"Combo {i+1}" for i in range(len(feature_names))], rotation=45)
-        axes[1].grid(True, alpha=0.3)
+        axes[1].set_xticklabels([f"Combo {i+1}" for i in range(len(feature_names))], rotation=45, ha='right')
+        axes[1].grid(True, alpha=0.3, linestyle='--', axis='y')
+        
+        # Add value labels on bars
+        for i, bar in enumerate(bars2):
+            height = bar.get_height()
+            axes[1].text(bar.get_x() + bar.get_width()/2., height + 0.005,
+                        f'{height:.3f}', ha='center', va='bottom', fontweight='bold', fontsize=9)
         
         # MAE comparison
-        axes[2].bar(range(len(feature_names)), mae_scores, color='lightcoral', alpha=0.7)
-        axes[2].set_title('Mean Absolute Error Comparison')
-        axes[2].set_xlabel('Feature Combinations')
-        axes[2].set_ylabel('MAE')
+        bars3 = axes[2].bar(range(len(feature_names)), mae_scores, color=colors[2], alpha=0.8, edgecolor='white', linewidth=1)
+        axes[2].set_title('Mean Absolute Error Comparison', fontweight='bold', pad=15)
+        axes[2].set_xlabel('Feature Combinations', fontweight='bold')
+        axes[2].set_ylabel('MAE', fontweight='bold')
         axes[2].set_xticks(range(len(feature_names)))
-        axes[2].set_xticklabels([f"Combo {i+1}" for i in range(len(feature_names))], rotation=45)
-        axes[2].grid(True, alpha=0.3)
+        axes[2].set_xticklabels([f"Combo {i+1}" for i in range(len(feature_names))], rotation=45, ha='right')
+        axes[2].grid(True, alpha=0.3, linestyle='--', axis='y')
         
-        plt.tight_layout()
-        plt.savefig('internship folder task level 1/Task1_Student_Score_Prediction/feature_comparison.png', 
-                   dpi=300, bbox_inches='tight')
+        # Add value labels on bars
+        for i, bar in enumerate(bars3):
+            height = bar.get_height()
+            axes[2].text(bar.get_x() + bar.get_width()/2., height + 0.2,
+                        f'{height:.1f}', ha='center', va='bottom', fontweight='bold', fontsize=9)
+        
+        plt.savefig('feature_comparison.png', 
+                   dpi=300, bbox_inches='tight', facecolor='white')
         plt.show()
         
         # Print best combinations

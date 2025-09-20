@@ -14,8 +14,7 @@ Bonus:
 - Try different clustering algorithms (e.g., DBSCAN)
 - Analyze average spending per cluster
 
-Author: AI Assistant
-Date: 2025
+ 
 """
 
 import pandas as pd
@@ -29,8 +28,28 @@ from sklearn.decomposition import PCA
 import warnings
 warnings.filterwarnings('ignore')
 
-# Set style for better plots
-plt.style.use('seaborn-v0_8')
+# Set professional style for better plots
+plt.style.use('default')
+plt.rcParams.update({
+    'figure.facecolor': 'white',
+    'axes.facecolor': 'white',
+    'axes.grid': True,
+    'grid.alpha': 0.3,
+    'axes.spines.top': False,
+    'axes.spines.right': False,
+    'axes.linewidth': 1.2,
+    'xtick.direction': 'out',
+    'ytick.direction': 'out',
+    'xtick.major.size': 5,
+    'ytick.major.size': 5,
+    'font.size': 11,
+    'axes.titlesize': 14,
+    'axes.labelsize': 12,
+    'xtick.labelsize': 10,
+    'ytick.labelsize': 10,
+    'legend.fontsize': 10,
+    'figure.titlesize': 16
+})
 sns.set_palette("husl")
 
 class CustomerSegmentation:
@@ -136,64 +155,73 @@ class CustomerSegmentation:
     
     def create_exploratory_plots(self, data):
         """
-        Create comprehensive exploratory visualizations
+        Create comprehensive exploratory visualizations with improved styling
         """
-        fig, axes = plt.subplots(2, 3, figsize=(18, 12))
-        fig.suptitle('Customer Data Exploration', fontsize=16, fontweight='bold')
+        fig, axes = plt.subplots(2, 3, figsize=(20, 14))
+        fig.suptitle('Customer Data Exploration', fontsize=18, fontweight='bold', y=0.98)
+        fig.subplots_adjust(top=0.93, bottom=0.08, left=0.08, right=0.95, hspace=0.35, wspace=0.3)
+        
+        # Define consistent color palette
+        colors = ['#2E86AB', '#A23B72', '#F18F01', '#C73E1D', '#7209B7', '#0B6623']
         
         # Distribution of age
-        axes[0, 0].hist(data['age'], bins=20, alpha=0.7, color='skyblue', edgecolor='black')
-        axes[0, 0].set_title('Distribution of Age')
-        axes[0, 0].set_xlabel('Age')
-        axes[0, 0].set_ylabel('Frequency')
-        axes[0, 0].grid(True, alpha=0.3)
+        axes[0, 0].hist(data['age'], bins=20, alpha=0.8, color=colors[0], edgecolor='white', linewidth=1)
+        axes[0, 0].set_title('Distribution of Age', fontweight='bold', pad=15)
+        axes[0, 0].set_xlabel('Age (years)', fontweight='bold')
+        axes[0, 0].set_ylabel('Frequency', fontweight='bold')
+        axes[0, 0].grid(True, alpha=0.3, linestyle='--')
         
         # Distribution of annual income
-        axes[0, 1].hist(data['annual_income'], bins=20, alpha=0.7, color='lightgreen', edgecolor='black')
-        axes[0, 1].set_title('Distribution of Annual Income')
-        axes[0, 1].set_xlabel('Annual Income (k$)')
-        axes[0, 1].set_ylabel('Frequency')
-        axes[0, 1].grid(True, alpha=0.3)
+        axes[0, 1].hist(data['annual_income'], bins=20, alpha=0.8, color=colors[1], edgecolor='white', linewidth=1)
+        axes[0, 1].set_title('Distribution of Annual Income', fontweight='bold', pad=15)
+        axes[0, 1].set_xlabel('Annual Income (k$)', fontweight='bold')
+        axes[0, 1].set_ylabel('Frequency', fontweight='bold')
+        axes[0, 1].grid(True, alpha=0.3, linestyle='--')
         
         # Distribution of spending score
-        axes[0, 2].hist(data['spending_score'], bins=20, alpha=0.7, color='orange', edgecolor='black')
-        axes[0, 2].set_title('Distribution of Spending Score')
-        axes[0, 2].set_xlabel('Spending Score')
-        axes[0, 2].set_ylabel('Frequency')
-        axes[0, 2].grid(True, alpha=0.3)
+        axes[0, 2].hist(data['spending_score'], bins=20, alpha=0.8, color=colors[2], edgecolor='white', linewidth=1)
+        axes[0, 2].set_title('Distribution of Spending Score', fontweight='bold', pad=15)
+        axes[0, 2].set_xlabel('Spending Score (1-100)', fontweight='bold')
+        axes[0, 2].set_ylabel('Frequency', fontweight='bold')
+        axes[0, 2].grid(True, alpha=0.3, linestyle='--')
         
         # Income vs Spending Score scatter plot
-        axes[1, 0].scatter(data['annual_income'], data['spending_score'], alpha=0.6, color='purple')
-        axes[1, 0].set_title('Annual Income vs Spending Score')
-        axes[1, 0].set_xlabel('Annual Income (k$)')
-        axes[1, 0].set_ylabel('Spending Score')
-        axes[1, 0].grid(True, alpha=0.3)
+        axes[1, 0].scatter(data['annual_income'], data['spending_score'], alpha=0.7, color=colors[3], s=60, edgecolors='white', linewidth=0.5)
+        axes[1, 0].set_title('Annual Income vs Spending Score', fontweight='bold', pad=15)
+        axes[1, 0].set_xlabel('Annual Income (k$)', fontweight='bold')
+        axes[1, 0].set_ylabel('Spending Score (1-100)', fontweight='bold')
+        axes[1, 0].grid(True, alpha=0.3, linestyle='--')
         
         # Age vs Spending Score scatter plot
-        axes[1, 1].scatter(data['age'], data['spending_score'], alpha=0.6, color='red')
-        axes[1, 1].set_title('Age vs Spending Score')
-        axes[1, 1].set_xlabel('Age')
-        axes[1, 1].set_ylabel('Spending Score')
-        axes[1, 1].grid(True, alpha=0.3)
+        axes[1, 1].scatter(data['age'], data['spending_score'], alpha=0.7, color=colors[4], s=60, edgecolors='white', linewidth=0.5)
+        axes[1, 1].set_title('Age vs Spending Score', fontweight='bold', pad=15)
+        axes[1, 1].set_xlabel('Age (years)', fontweight='bold')
+        axes[1, 1].set_ylabel('Spending Score (1-100)', fontweight='bold')
+        axes[1, 1].grid(True, alpha=0.3, linestyle='--')
         
         # Correlation heatmap
         correlation_matrix = data[['age', 'annual_income', 'spending_score']].corr()
-        im = axes[1, 2].imshow(correlation_matrix, cmap='coolwarm', aspect='auto')
-        axes[1, 2].set_title('Feature Correlation Matrix')
+        im = axes[1, 2].imshow(correlation_matrix, cmap='RdBu_r', aspect='auto', vmin=-1, vmax=1)
+        axes[1, 2].set_title('Feature Correlation Matrix', fontweight='bold', pad=15)
         axes[1, 2].set_xticks(range(len(correlation_matrix.columns)))
         axes[1, 2].set_yticks(range(len(correlation_matrix.columns)))
-        axes[1, 2].set_xticklabels(correlation_matrix.columns, rotation=45)
+        axes[1, 2].set_xticklabels(correlation_matrix.columns, rotation=45, ha='right')
         axes[1, 2].set_yticklabels(correlation_matrix.columns)
         
-        # Add correlation values to heatmap
+        # Add correlation values to heatmap with better formatting
         for i in range(len(correlation_matrix.columns)):
             for j in range(len(correlation_matrix.columns)):
-                text = axes[1, 2].text(j, i, f'{correlation_matrix.iloc[i, j]:.2f}',
-                                     ha="center", va="center", color="black", fontweight='bold')
+                value = correlation_matrix.iloc[i, j]
+                color = 'white' if abs(value) > 0.5 else 'black'
+                text = axes[1, 2].text(j, i, f'{value:.2f}',
+                                     ha="center", va="center", color=color, fontweight='bold', fontsize=10)
         
-        plt.tight_layout()
-        plt.savefig('internship folder task level 1/Task2_Customer_Segmentation/data_exploration.png', 
-                   dpi=300, bbox_inches='tight')
+        # Add colorbar
+        cbar = plt.colorbar(im, ax=axes[1, 2], shrink=0.8)
+        cbar.set_label('Correlation Coefficient', fontweight='bold')
+        
+        plt.savefig('data_exploration.png', 
+                   dpi=300, bbox_inches='tight', facecolor='white')
         plt.show()
         
         # Print correlation insights
@@ -256,33 +284,56 @@ class CustomerSegmentation:
             calinski_scores.append(calinski_harabasz_score(self.scaled_data, kmeans.labels_))
         
         # Plot elbow method and silhouette analysis
-        fig, axes = plt.subplots(1, 3, figsize=(18, 6))
-        fig.suptitle('Optimal Number of Clusters Analysis', fontsize=16, fontweight='bold')
+        fig, axes = plt.subplots(1, 3, figsize=(20, 8))
+        fig.suptitle('Optimal Number of Clusters Analysis', fontsize=18, fontweight='bold', y=0.98)
+        fig.subplots_adjust(top=0.85, bottom=0.15, left=0.08, right=0.95, wspace=0.3)
+        
+        # Define consistent color palette
+        colors = ['#2E86AB', '#A23B72', '#F18F01']
         
         # Elbow method
-        axes[0].plot(k_range, inertias, 'bo-', linewidth=2, markersize=8)
-        axes[0].set_title('Elbow Method')
-        axes[0].set_xlabel('Number of Clusters (k)')
-        axes[0].set_ylabel('Inertia')
-        axes[0].grid(True, alpha=0.3)
+        axes[0].plot(k_range, inertias, 'o-', linewidth=3, markersize=10, color=colors[0], markerfacecolor='white', markeredgecolor=colors[0], markeredgewidth=2)
+        axes[0].set_title('Elbow Method', fontweight='bold', pad=15)
+        axes[0].set_xlabel('Number of Clusters (k)', fontweight='bold')
+        axes[0].set_ylabel('Inertia', fontweight='bold')
+        axes[0].grid(True, alpha=0.3, linestyle='--')
+        
+        # Highlight optimal point
+        optimal_idx = np.argmax(silhouette_scores)
+        axes[0].scatter(k_range[optimal_idx], inertias[optimal_idx], color='red', s=150, zorder=5, edgecolors='black', linewidth=2)
+        axes[0].text(k_range[optimal_idx], inertias[optimal_idx] + max(inertias)*0.02, f'Optimal k={k_range[optimal_idx]}', 
+                    ha='center', va='bottom', fontweight='bold', fontsize=12, 
+                    bbox=dict(boxstyle='round,pad=0.3', facecolor='white', alpha=0.8))
         
         # Silhouette analysis
-        axes[1].plot(k_range, silhouette_scores, 'ro-', linewidth=2, markersize=8)
-        axes[1].set_title('Silhouette Analysis')
-        axes[1].set_xlabel('Number of Clusters (k)')
-        axes[1].set_ylabel('Silhouette Score')
-        axes[1].grid(True, alpha=0.3)
+        axes[1].plot(k_range, silhouette_scores, 'o-', linewidth=3, markersize=10, color=colors[1], markerfacecolor='white', markeredgecolor=colors[1], markeredgewidth=2)
+        axes[1].set_title('Silhouette Analysis', fontweight='bold', pad=15)
+        axes[1].set_xlabel('Number of Clusters (k)', fontweight='bold')
+        axes[1].set_ylabel('Silhouette Score', fontweight='bold')
+        axes[1].grid(True, alpha=0.3, linestyle='--')
+        
+        # Highlight optimal point
+        axes[1].scatter(k_range[optimal_idx], silhouette_scores[optimal_idx], color='red', s=150, zorder=5, edgecolors='black', linewidth=2)
+        axes[1].text(k_range[optimal_idx], silhouette_scores[optimal_idx] + max(silhouette_scores)*0.02, f'Best k={k_range[optimal_idx]}', 
+                    ha='center', va='bottom', fontweight='bold', fontsize=12,
+                    bbox=dict(boxstyle='round,pad=0.3', facecolor='white', alpha=0.8))
         
         # Calinski-Harabasz index
-        axes[2].plot(k_range, calinski_scores, 'go-', linewidth=2, markersize=8)
-        axes[2].set_title('Calinski-Harabasz Index')
-        axes[2].set_xlabel('Number of Clusters (k)')
-        axes[2].set_ylabel('Calinski-Harabasz Score')
-        axes[2].grid(True, alpha=0.3)
+        axes[2].plot(k_range, calinski_scores, 'o-', linewidth=3, markersize=10, color=colors[2], markerfacecolor='white', markeredgecolor=colors[2], markeredgewidth=2)
+        axes[2].set_title('Calinski-Harabasz Index', fontweight='bold', pad=15)
+        axes[2].set_xlabel('Number of Clusters (k)', fontweight='bold')
+        axes[2].set_ylabel('Calinski-Harabasz Score', fontweight='bold')
+        axes[2].grid(True, alpha=0.3, linestyle='--')
         
-        plt.tight_layout()
-        plt.savefig('internship folder task level 1/Task2_Customer_Segmentation/optimal_clusters.png', 
-                   dpi=300, bbox_inches='tight')
+        # Highlight optimal point
+        optimal_calinski_idx = np.argmax(calinski_scores)
+        axes[2].scatter(k_range[optimal_calinski_idx], calinski_scores[optimal_calinski_idx], color='red', s=150, zorder=5, edgecolors='black', linewidth=2)
+        axes[2].text(k_range[optimal_calinski_idx], calinski_scores[optimal_calinski_idx] + max(calinski_scores)*0.02, f'Best k={k_range[optimal_calinski_idx]}', 
+                    ha='center', va='bottom', fontweight='bold', fontsize=12,
+                    bbox=dict(boxstyle='round,pad=0.3', facecolor='white', alpha=0.8))
+        
+        plt.savefig('optimal_clusters.png', 
+                   dpi=300, bbox_inches='tight', facecolor='white')
         plt.show()
         
         # Find optimal k
@@ -416,7 +467,7 @@ class CustomerSegmentation:
     
     def visualize_clusters(self, kmeans_labels, dbscan_labels=None, hierarchical_labels=None):
         """
-        Visualize clusters using 2D plots
+        Visualize clusters using 2D plots with improved styling
         """
         print("\n" + "=" * 60)
         print("CLUSTER VISUALIZATION")
@@ -429,7 +480,8 @@ class CustomerSegmentation:
         if hierarchical_labels is not None:
             n_plots += 1
         
-        fig, axes = plt.subplots(1, n_plots, figsize=(6*n_plots, 6))
+        fig, axes = plt.subplots(1, n_plots, figsize=(8*n_plots, 8))
+        fig.subplots_adjust(left=0.08, right=0.95, wspace=0.3)
         if n_plots == 1:
             axes = [axes]
         
@@ -439,38 +491,40 @@ class CustomerSegmentation:
         
         # K-Means visualization
         scatter = axes[plot_idx].scatter(self.data['annual_income'], self.data['spending_score'], 
-                                       c=kmeans_labels, cmap='viridis', alpha=0.7)
-        axes[plot_idx].set_title('K-Means Clustering')
-        axes[plot_idx].set_xlabel('Annual Income (k$)')
-        axes[plot_idx].set_ylabel('Spending Score')
-        axes[plot_idx].grid(True, alpha=0.3)
-        plt.colorbar(scatter, ax=axes[plot_idx])
+                                       c=kmeans_labels, cmap='viridis', alpha=0.8, s=80, edgecolors='white', linewidth=0.5)
+        axes[plot_idx].set_title('K-Means Clustering', fontweight='bold', pad=15)
+        axes[plot_idx].set_xlabel('Annual Income (k$)', fontweight='bold')
+        axes[plot_idx].set_ylabel('Spending Score (1-100)', fontweight='bold')
+        axes[plot_idx].grid(True, alpha=0.3, linestyle='--')
+        cbar = plt.colorbar(scatter, ax=axes[plot_idx])
+        cbar.set_label('Cluster ID', fontweight='bold')
         plot_idx += 1
         
         # DBSCAN visualization (if available)
         if dbscan_labels is not None:
             scatter = axes[plot_idx].scatter(self.data['annual_income'], self.data['spending_score'], 
-                                           c=dbscan_labels, cmap='viridis', alpha=0.7)
-            axes[plot_idx].set_title('DBSCAN Clustering')
-            axes[plot_idx].set_xlabel('Annual Income (k$)')
-            axes[plot_idx].set_ylabel('Spending Score')
-            axes[plot_idx].grid(True, alpha=0.3)
-            plt.colorbar(scatter, ax=axes[plot_idx])
+                                           c=dbscan_labels, cmap='viridis', alpha=0.8, s=80, edgecolors='white', linewidth=0.5)
+            axes[plot_idx].set_title('DBSCAN Clustering', fontweight='bold', pad=15)
+            axes[plot_idx].set_xlabel('Annual Income (k$)', fontweight='bold')
+            axes[plot_idx].set_ylabel('Spending Score (1-100)', fontweight='bold')
+            axes[plot_idx].grid(True, alpha=0.3, linestyle='--')
+            cbar = plt.colorbar(scatter, ax=axes[plot_idx])
+            cbar.set_label('Cluster ID', fontweight='bold')
             plot_idx += 1
         
         # Hierarchical visualization (if available)
         if hierarchical_labels is not None:
             scatter = axes[plot_idx].scatter(self.data['annual_income'], self.data['spending_score'], 
-                                           c=hierarchical_labels, cmap='viridis', alpha=0.7)
-            axes[plot_idx].set_title('Hierarchical Clustering')
-            axes[plot_idx].set_xlabel('Annual Income (k$)')
-            axes[plot_idx].set_ylabel('Spending Score')
-            axes[plot_idx].grid(True, alpha=0.3)
-            plt.colorbar(scatter, ax=axes[plot_idx])
+                                           c=hierarchical_labels, cmap='viridis', alpha=0.8, s=80, edgecolors='white', linewidth=0.5)
+            axes[plot_idx].set_title('Hierarchical Clustering', fontweight='bold', pad=15)
+            axes[plot_idx].set_xlabel('Annual Income (k$)', fontweight='bold')
+            axes[plot_idx].set_ylabel('Spending Score (1-100)', fontweight='bold')
+            axes[plot_idx].grid(True, alpha=0.3, linestyle='--')
+            cbar = plt.colorbar(scatter, ax=axes[plot_idx])
+            cbar.set_label('Cluster ID', fontweight='bold')
         
-        plt.tight_layout()
-        plt.savefig('internship folder task level 1/Task2_Customer_Segmentation/cluster_visualization.png', 
-                   dpi=300, bbox_inches='tight')
+        plt.savefig('cluster_visualization.png', 
+                   dpi=300, bbox_inches='tight', facecolor='white')
         plt.show()
         
         # Create detailed cluster analysis plot
@@ -478,48 +532,65 @@ class CustomerSegmentation:
     
     def create_detailed_cluster_analysis(self, kmeans_labels):
         """
-        Create detailed cluster analysis visualization
+        Create detailed cluster analysis visualization with improved styling
         """
-        fig, axes = plt.subplots(2, 2, figsize=(15, 12))
-        fig.suptitle('Detailed Cluster Analysis', fontsize=16, fontweight='bold')
+        fig, axes = plt.subplots(2, 2, figsize=(16, 14))
+        fig.suptitle('Detailed Cluster Analysis', fontsize=18, fontweight='bold', y=0.98)
+        fig.subplots_adjust(top=0.93, bottom=0.08, left=0.08, right=0.95, hspace=0.35, wspace=0.3)
+        
+        # Define consistent color palette
+        colors = ['#2E86AB', '#A23B72', '#F18F01', '#C73E1D', '#7209B7', '#0B6623']
         
         # Income vs Spending Score with clusters
         scatter = axes[0, 0].scatter(self.data['annual_income'], self.data['spending_score'], 
-                                   c=kmeans_labels, cmap='viridis', alpha=0.7)
-        axes[0, 0].set_title('Income vs Spending Score (Clusters)')
-        axes[0, 0].set_xlabel('Annual Income (k$)')
-        axes[0, 0].set_ylabel('Spending Score')
-        axes[0, 0].grid(True, alpha=0.3)
-        plt.colorbar(scatter, ax=axes[0, 0])
+                                   c=kmeans_labels, cmap='viridis', alpha=0.8, s=80, edgecolors='white', linewidth=0.5)
+        axes[0, 0].set_title('Income vs Spending Score (Clusters)', fontweight='bold', pad=15)
+        axes[0, 0].set_xlabel('Annual Income (k$)', fontweight='bold')
+        axes[0, 0].set_ylabel('Spending Score (1-100)', fontweight='bold')
+        axes[0, 0].grid(True, alpha=0.3, linestyle='--')
+        cbar = plt.colorbar(scatter, ax=axes[0, 0])
+        cbar.set_label('Cluster ID', fontweight='bold')
         
         # Age vs Spending Score with clusters
         scatter = axes[0, 1].scatter(self.data['age'], self.data['spending_score'], 
-                                   c=kmeans_labels, cmap='viridis', alpha=0.7)
-        axes[0, 1].set_title('Age vs Spending Score (Clusters)')
-        axes[0, 1].set_xlabel('Age')
-        axes[0, 1].set_ylabel('Spending Score')
-        axes[0, 1].grid(True, alpha=0.3)
-        plt.colorbar(scatter, ax=axes[0, 1])
+                                   c=kmeans_labels, cmap='viridis', alpha=0.8, s=80, edgecolors='white', linewidth=0.5)
+        axes[0, 1].set_title('Age vs Spending Score (Clusters)', fontweight='bold', pad=15)
+        axes[0, 1].set_xlabel('Age (years)', fontweight='bold')
+        axes[0, 1].set_ylabel('Spending Score (1-100)', fontweight='bold')
+        axes[0, 1].grid(True, alpha=0.3, linestyle='--')
+        cbar = plt.colorbar(scatter, ax=axes[0, 1])
+        cbar.set_label('Cluster ID', fontweight='bold')
         
         # Cluster size distribution
         cluster_sizes = pd.Series(kmeans_labels).value_counts().sort_index()
-        axes[1, 0].bar(cluster_sizes.index, cluster_sizes.values, color='skyblue', alpha=0.7)
-        axes[1, 0].set_title('Cluster Size Distribution')
-        axes[1, 0].set_xlabel('Cluster ID')
-        axes[1, 0].set_ylabel('Number of Customers')
-        axes[1, 0].grid(True, alpha=0.3)
+        bars = axes[1, 0].bar(cluster_sizes.index, cluster_sizes.values, color=colors[0], alpha=0.8, edgecolor='white', linewidth=1)
+        axes[1, 0].set_title('Cluster Size Distribution', fontweight='bold', pad=15)
+        axes[1, 0].set_xlabel('Cluster ID', fontweight='bold')
+        axes[1, 0].set_ylabel('Number of Customers', fontweight='bold')
+        axes[1, 0].grid(True, alpha=0.3, linestyle='--', axis='y')
+        
+        # Add value labels on bars
+        for bar in bars:
+            height = bar.get_height()
+            axes[1, 0].text(bar.get_x() + bar.get_width()/2., height + 0.5,
+                        f'{int(height)}', ha='center', va='bottom', fontweight='bold', fontsize=10)
         
         # Average spending per cluster
         avg_spending = self.data.groupby(kmeans_labels)['spending_score'].mean()
-        axes[1, 1].bar(avg_spending.index, avg_spending.values, color='lightgreen', alpha=0.7)
-        axes[1, 1].set_title('Average Spending Score per Cluster')
-        axes[1, 1].set_xlabel('Cluster ID')
-        axes[1, 1].set_ylabel('Average Spending Score')
-        axes[1, 1].grid(True, alpha=0.3)
+        bars = axes[1, 1].bar(avg_spending.index, avg_spending.values, color=colors[1], alpha=0.8, edgecolor='white', linewidth=1)
+        axes[1, 1].set_title('Average Spending Score per Cluster', fontweight='bold', pad=15)
+        axes[1, 1].set_xlabel('Cluster ID', fontweight='bold')
+        axes[1, 1].set_ylabel('Average Spending Score', fontweight='bold')
+        axes[1, 1].grid(True, alpha=0.3, linestyle='--', axis='y')
         
-        plt.tight_layout()
-        plt.savefig('internship folder task level 1/Task2_Customer_Segmentation/detailed_cluster_analysis.png', 
-                   dpi=300, bbox_inches='tight')
+        # Add value labels on bars
+        for bar in bars:
+            height = bar.get_height()
+            axes[1, 1].text(bar.get_x() + bar.get_width()/2., height + 0.5,
+                        f'{height:.1f}', ha='center', va='bottom', fontweight='bold', fontsize=10)
+        
+        plt.savefig('detailed_cluster_analysis.png', 
+                   dpi=300, bbox_inches='tight', facecolor='white')
         plt.show()
         
         # Print average spending per cluster
@@ -548,7 +619,10 @@ class CustomerSegmentation:
             if name == 'DBSCAN':
                 # Handle DBSCAN noise points
                 non_noise_mask = labels != -1
-                if np.sum(non_noise_mask) > 1:
+                unique_labels = np.unique(labels[non_noise_mask])
+                n_clusters = len(unique_labels)
+                
+                if n_clusters > 1 and np.sum(non_noise_mask) > 1:
                     silhouette_avg = silhouette_score(self.scaled_data[non_noise_mask], 
                                                     labels[non_noise_mask])
                     calinski_score = calinski_harabasz_score(self.scaled_data[non_noise_mask], 
@@ -556,7 +630,6 @@ class CustomerSegmentation:
                 else:
                     silhouette_avg = 0
                     calinski_score = 0
-                n_clusters = len(set(labels)) - (1 if -1 in labels else 0)
             else:
                 silhouette_avg = silhouette_score(self.scaled_data, labels)
                 calinski_score = calinski_harabasz_score(self.scaled_data, labels)
@@ -575,26 +648,41 @@ class CustomerSegmentation:
         print(comparison_df.to_string(index=False))
         
         # Create comparison plot
-        fig, axes = plt.subplots(1, 2, figsize=(15, 6))
-        fig.suptitle('Clustering Algorithms Comparison', fontsize=16, fontweight='bold')
+        fig, axes = plt.subplots(1, 2, figsize=(16, 8))
+        fig.suptitle('Clustering Algorithms Comparison', fontsize=18, fontweight='bold', y=0.98)
+        fig.subplots_adjust(top=0.85, bottom=0.15, left=0.08, right=0.95, wspace=0.3)
+        
+        # Define consistent color palette
+        colors = ['#2E86AB', '#A23B72', '#F18F01']
         
         # Silhouette score comparison
-        axes[0].bar(comparison_df['Algorithm'], comparison_df['Silhouette'], 
-                   color=['skyblue', 'lightgreen', 'lightcoral'], alpha=0.7)
-        axes[0].set_title('Silhouette Score Comparison')
-        axes[0].set_ylabel('Silhouette Score')
-        axes[0].grid(True, alpha=0.3)
+        bars1 = axes[0].bar(comparison_df['Algorithm'], comparison_df['Silhouette'], 
+                           color=colors, alpha=0.8, edgecolor='white', linewidth=1)
+        axes[0].set_title('Silhouette Score Comparison', fontweight='bold', pad=15)
+        axes[0].set_ylabel('Silhouette Score', fontweight='bold')
+        axes[0].grid(True, alpha=0.3, linestyle='--', axis='y')
+        
+        # Add value labels on bars
+        for bar in bars1:
+            height = bar.get_height()
+            axes[0].text(bar.get_x() + bar.get_width()/2., height + 0.005,
+                        f'{height:.3f}', ha='center', va='bottom', fontweight='bold', fontsize=10)
         
         # Calinski-Harabasz score comparison
-        axes[1].bar(comparison_df['Algorithm'], comparison_df['Calinski-Harabasz'], 
-                   color=['skyblue', 'lightgreen', 'lightcoral'], alpha=0.7)
-        axes[1].set_title('Calinski-Harabasz Score Comparison')
-        axes[1].set_ylabel('Calinski-Harabasz Score')
-        axes[1].grid(True, alpha=0.3)
+        bars2 = axes[1].bar(comparison_df['Algorithm'], comparison_df['Calinski-Harabasz'], 
+                           color=colors, alpha=0.8, edgecolor='white', linewidth=1)
+        axes[1].set_title('Calinski-Harabasz Score Comparison', fontweight='bold', pad=15)
+        axes[1].set_ylabel('Calinski-Harabasz Score', fontweight='bold')
+        axes[1].grid(True, alpha=0.3, linestyle='--', axis='y')
         
-        plt.tight_layout()
-        plt.savefig('internship folder task level 1/Task2_Customer_Segmentation/algorithm_comparison.png', 
-                   dpi=300, bbox_inches='tight')
+        # Add value labels on bars
+        for bar in bars2:
+            height = bar.get_height()
+            axes[1].text(bar.get_x() + bar.get_width()/2., height + max(comparison_df['Calinski-Harabasz'])*0.01,
+                        f'{height:.0f}', ha='center', va='bottom', fontweight='bold', fontsize=10)
+        
+        plt.savefig('algorithm_comparison.png', 
+                   dpi=300, bbox_inches='tight', facecolor='white')
         plt.show()
     
     def run_complete_analysis(self):
