@@ -14,7 +14,7 @@ Bonus:
 - Use SMOTE or other techniques to address class imbalance
 - Try logistic regression vs. decision tree
 
-Author: AI Assistant
+Author: Muhammad Hashir Sakim DAD
 Date: 2025
 """
 
